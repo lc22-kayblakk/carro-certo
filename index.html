@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Compra de Carro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="logo.png" alt="Logo" id="logo">
+      <h1>Checklist para Compra de Carro</h1>
+    </header>
+
+    <form id="carForm">
+      <label for="marca">Marca:</label>
+      <select id="marca" required>
+        <!-- As marcas serão carregadas dinamicamente -->
+      </select>
+
+      <label for="modelo">Modelo:</label>
+      <select id="modelo" required>
+        <!-- Os modelos serão carregados dinamicamente -->
+      </select>
+
+      <label for="ano">Ano:</label>
+      <select id="ano" required>
+        <!-- Os anos serão carregados dinamicamente -->
+      </select>
+
+      <h2>Avarias</h2>
+      <div class="checklist">
+        <label><input type="checkbox" value="2"> Pintura riscada (-2%)</label>
+        <label><input type="checkbox" value="5"> Vazamento no motor (-5%)</label>
+        <label><input type="checkbox" value="3"> Pneus carecas (-3%)</label>
+        <label><input type="checkbox" value="1"> Interior desgastado (-1%)</label>
+        <label><input type="checkbox" value="2"> Vidros trincados (-2%)</label>
+      </div>
+
+      <button type="submit">Calcular Valor</button>
+    </form>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
