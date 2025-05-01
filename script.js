@@ -1,4 +1,6 @@
 const apiBase = "https://parallelum.com.br/fipe/api/v1/carros/marcas";
+let modeloSelecionado = "";
+let anoSelecionado = "";
 let codigoFipeSelecionado = "";
 
 async function carregarMarcas() {
@@ -31,8 +33,8 @@ document.getElementById("marca").addEventListener("change", async function () {
 
 document.getElementById("modelo").addEventListener("change", async function () {
   const marcaId = document.getElementById("marca").value;
-  const modeloId = this.value;
-  const res = await fetch(`${apiBase}/${marcaId}/modelos/${modeloId}/anos`);
+  modeloSelecionado = this.value;
+  const res = await fetch(`${apiBase}/${marcaId}/modelos/${modeloSelecionado}/anos`);
   const anos = await res.json();
   const anoSelect = document.getElementById("ano");
   anoSelect.innerHTML = "<option value=''>Selecione o ano</option>";
@@ -48,6 +50,7 @@ document.getElementById("ano").addEventListener("change", async function () {
   const marcaId = document.getElementById("marca").value;
   const modeloId = document.getElementById("modelo").value;
   const anoId = this.value;
+  anoSelecionado = anoId;
   const res = await fetch(`${apiBase}/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
   const data = await res.json();
   codigoFipeSelecionado = data.CodigoFipe;
@@ -55,17 +58,22 @@ document.getElementById("ano").addEventListener("change", async function () {
 
 async function calcularValorJusto() {
   if (!codigoFipeSelecionado) return alert("Selecione todos os campos corretamente.");
-  const res = await fetch(`https://brasilapi.com.br/api/fipe/preco/v1/${codigoFipeSelecionado}`);
-  const data = await res.json();
-  if (!data || data.length === 0) return alert("Valor não encontrado.");
 
-  const valorFipe = parseFloat(data[0].valor);
-  let desconto = 0;
-  document.querySelectorAll("#checklist input:checked").forEach(chk => {
-    desconto += parseFloat(chk.value);
-  });
-  const valorFinal = valorFipe * (1 - desconto / 100);
-  document.getElementById("resultado").textContent = `Valor FIPE: R$ ${valorFipe.toFixed(2)} → Valor sugerido: R$ ${valorFinal.toFixed(2)}`;
+  try {
+    const res = await fetch(`https://brasilapi.com.br/api/fipe/preco/v1/${codigoFipeSelecionado}`);
+    const data = await res.json();
+    if (!data || data.length === 0) return alert("Valor não encontrado.");
+
+    const valorFipe = parseFloat(data[0].valor.replace("R$", "").replace(".", "").replace(",", "."));
+    let desconto = 0;
+    document.querySelectorAll("#checklist input:checked").forEach(chk => {
+      desconto += parseFloat(chk.value);
+    });
+    const valorFinal = valorFipe * (1 - desconto / 100);
+    document.getElementById("resultado").textContent = `Valor FIPE: R$ ${valorFipe.toFixed(2)} → Valor sugerido: R$ ${valorFinal.toFixed(2)}`;
+  } catch (e) {
+    alert("Erro ao buscar valor FIPE.");
+  }
 }
 
 carregarMarcas();
