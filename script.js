@@ -1,4 +1,5 @@
-const apiBase = "https://parallelum.com.br/fipe/api/v1/carros/marcas";
+const apiBase = "https://brasilapi.com.br/api/fipe/preco/v1/{codigoFipe}
+";
 
 async function carregarMarcas() {
   const res = await fetch(apiBase);
