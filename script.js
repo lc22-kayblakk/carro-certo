@@ -15,7 +15,7 @@ async function carregarMarcas() {
 
 async function carregarModelos() {
   const marcaId = document.getElementById('marca').value;
-  const response = await fetch(`${apiUrl}/marcas/${marcaId}/modelos`);
+  const response = await fetch(`${apiUrl}/marcas/modelos`);
   const modelos = await response.json();
   const selectModelo = document.getElementById('modelo');
   selectModelo.innerHTML = '';
