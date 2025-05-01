@@ -1,46 +1,60 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carro Certo - Guia de Compra</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-black text-white font-sans">
 
-  <header class="text-center py-8 bg-black">
-    <h1 class="text-4xl font-bold text-red-600">CARRO<span class="text-white">CERTO</span></h1>
-    <p class="text-white text-sm mt-2">Dicas essenciais para uma compra sem arrependimentos</p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carro Certo - Guia de Compra</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🚗 Carro Certo</h1>
+    <p>Seu guia inteligente para comprar o carro ideal com segurança e economia.</p>
   </header>
 
-  <main class="max-w-3xl mx-auto p-4 space-y-8">
-    <section>
-      <h2 class="text-2xl font-semibold mb-4 text-red-500">1. Selecione o veículo</h2>
-      <div class="space-y-4">
-        <select id="marca" class="w-full p-2 rounded text-black"></select>
-        <select id="modelo" class="w-full p-2 rounded text-black"></select>
-        <select id="ano" class="w-full p-2 rounded text-black"></select>
-      </div>
-    </section>
+  <section class="banner">
+    <img src="car-banner.jpg" alt="Compra de Carro" />
+  </section>
 
-    <section>
-      <h2 class="text-2xl font-semibold mb-4 text-red-500">2. Checklist de avaliação</h2>
-      <form id="checklist" class="space-y-2">
-        <label><input type="checkbox" value="5" /> Lataria com avarias ou ferrugem</label><br>
-        <label><input type="checkbox" value="3" /> Pneus desgastados</label><br>
-        <label><input type="checkbox" value="7" /> Motor com vazamentos ou ruídos</label><br>
-        <label><input type="checkbox" value="4" /> Parte elétrica com falhas</label><br>
-        <label><input type="checkbox" value="5" /> Quilometragem acima da média</label><br>
-        <label><input type="checkbox" value="6" /> Documentação irregular</label><br>
-        <label><input type="checkbox" value="8" /> Histórico de batidas/sinistros</label><br>
-      </form>
-    </section>
+  <section class="intro">
+    <h2>Por que usar o Carro Certo?</h2>
+    <ul>
+      <li>✅ Carros desvalorizam rápido — negocie com consciência.</li>
+      <li>✅ Evite surpresas com nosso checklist de pontos críticos.</li>
+      <li>✅ Veja o valor estimado com base na Tabela FIPE e estado do veículo.</li>
+    </ul>
+  </section>
 
-    <section>
-      <button onclick="calcularValorJusto()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Calcular valor justo</button>
-      <p id="resultado" class="mt-4 text-lg font-semibold text-green-400"></p>
-    </section>
-  </main>
+  <section class="fipe">
+    <h2>Escolha seu veículo</h2>
+    <label>Marca:
+      <select id="marca"></select>
+    </label>
+    <label>Modelo:
+      <select id="modelo"></select>
+    </label>
+    <label>Ano:
+      <select id="ano"></select>
+    </label>
+  </section>
+
+  <section id="checklist">
+    <h2>Checklist do Veículo</h2>
+    <p>Marque os problemas encontrados:</p>
+    <label><input type="checkbox" value="5"> Pneus desgastados (-5%)</label>
+    <label><input type="checkbox" value="10"> Pintura ruim ou amassados (-10%)</label>
+    <label><input type="checkbox" value="7"> Interior mal conservado (-7%)</label>
+    <label><input type="checkbox" value="8"> Manutenção irregular (-8%)</label>
+    <label><input type="checkbox" value="5"> Histórico de batida (-5%)</label>
+    <button onclick="calcularValorJusto()">Calcular Valor Sugerido</button>
+  </section>
+
+  <section id="resultado" class="resultado"></section>
+
+  <footer>
+    <p>© 2025 Carro Certo — Dados via Tabela FIPE + BrasilAPI</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
