@@ -2,7 +2,7 @@
 const apiUrl = 'https://parallelum.com.br/fipe/api/v1/carros';
 
 async function carregarMarcas() {
-  const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas`);
+  const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/%{marcaId}/modelos`);
   const marcas = await response.json();
   const selectMarca = document.getElementById('marca');
   marcas.forEach(marca => {
@@ -15,7 +15,8 @@ async function carregarMarcas() {
 
 async function carregarModelos() {
   const marcaId = document.getElementById('marca').value;
-  const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/59/modelos`);
+  const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/%{marcaId}/modelos/%{modeloId}/anos
+`);
   const modelos = await response.json();
   const selectModelo = document.getElementById('modelo');
   selectModelo.innerHTML = '';
