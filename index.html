@@ -1,49 +1,46 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checklist Compra de Carro</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Carro Certo - Guia de Compra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <img src="logo.png" alt="Logo" id="logo">
-      <h1>Checklist para Compra de Carro</h1>
-    </header>
+<body class="bg-black text-white font-sans">
 
-    <form id="carForm">
-      <label for="marca">Marca:</label>
-      <select id="marca" required>
-        <!-- As marcas serão carregadas dinamicamente -->
-      </select>
+  <header class="text-center py-8 bg-black">
+    <h1 class="text-4xl font-bold text-red-600">CARRO<span class="text-white">CERTO</span></h1>
+    <p class="text-white text-sm mt-2">Dicas essenciais para uma compra sem arrependimentos</p>
+  </header>
 
-      <label for="modelo">Modelo:</label>
-      <select id="modelo" required>
-        <!-- Os modelos serão carregados dinamicamente -->
-      </select>
-
-      <label for="ano">Ano:</label>
-      <select id="ano" required>
-        <!-- Os anos serão carregados dinamicamente -->
-      </select>
-
-      <h2>Avarias</h2>
-      <div class="checklist">
-        <label><input type="checkbox" value="2"> Pintura riscada (-2%)</label>
-        <label><input type="checkbox" value="5"> Vazamento no motor (-5%)</label>
-        <label><input type="checkbox" value="3"> Pneus carecas (-3%)</label>
-        <label><input type="checkbox" value="1"> Interior desgastado (-1%)</label>
-        <label><input type="checkbox" value="2"> Vidros trincados (-2%)</label>
+  <main class="max-w-3xl mx-auto p-4 space-y-8">
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-red-500">1. Selecione o veículo</h2>
+      <div class="space-y-4">
+        <select id="marca" class="w-full p-2 rounded text-black"></select>
+        <select id="modelo" class="w-full p-2 rounded text-black"></select>
+        <select id="ano" class="w-full p-2 rounded text-black"></select>
       </div>
+    </section>
 
-      <button type="submit">Calcular Valor</button>
-    </form>
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-red-500">2. Checklist de avaliação</h2>
+      <form id="checklist" class="space-y-2">
+        <label><input type="checkbox" value="5" /> Lataria com avarias ou ferrugem</label><br>
+        <label><input type="checkbox" value="3" /> Pneus desgastados</label><br>
+        <label><input type="checkbox" value="7" /> Motor com vazamentos ou ruídos</label><br>
+        <label><input type="checkbox" value="4" /> Parte elétrica com falhas</label><br>
+        <label><input type="checkbox" value="5" /> Quilometragem acima da média</label><br>
+        <label><input type="checkbox" value="6" /> Documentação irregular</label><br>
+        <label><input type="checkbox" value="8" /> Histórico de batidas/sinistros</label><br>
+      </form>
+    </section>
 
-    <div id="resultado"></div>
-  </div>
+    <section>
+      <button onclick="calcularValorJusto()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Calcular valor justo</button>
+      <p id="resultado" class="mt-4 text-lg font-semibold text-green-400"></p>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
