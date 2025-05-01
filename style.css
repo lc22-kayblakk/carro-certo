@@ -1,67 +1,75 @@
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f0f4f8;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  padding: 20px;
-}
-
-.container {
-  max-width: 600px;
-  background: #fff;
-  padding: 20px;
-  margin: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 0;
 }
 
 header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+  background-color: #111;
+  padding: 20px;
+  text-align: center;
 }
 
-#logo {
-  width: 50px;
-  margin-right: 10px;
+header img {
+  max-width: 200px;
 }
 
-h1 {
-  color: #333;
-  font-size: 24px;
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #1a1a1a;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(255, 30, 30, 0.3);
+}
+
+h1, h2 {
+  color: #FF1E1E;
+  text-align: center;
 }
 
 label {
+  font-weight: bold;
   display: block;
-  margin: 10px 0 5px;
+  margin-top: 20px;
 }
 
-select {
+select, input[type="checkbox"] {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background-color: #222;
+  color: white;
 }
 
 button {
-  padding: 10px;
+  margin-top: 30px;
   width: 100%;
-  background-color: #007bff;
+  padding: 12px;
+  background-color: #FF1E1E;
   color: white;
   border: none;
+  border-radius: 12px;
+  font-size: 16px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #cc1818;
 }
 
-#resultado {
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-.checklist label {
-  display: block;
+.resultado {
+  margin-top: 30px;
+  background-color: #111;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+  border: 1px solid #FF1E1E;
 }
