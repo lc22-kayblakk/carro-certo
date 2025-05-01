@@ -1,7 +1,7 @@
 
 const apiUrl = 'https://parallelum.com.br/fipe/api/v1/carros';
 
-async function carregarMarcas() {
+async function carregarMarcasss() {
   const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/%{marcaId}/modelos`);
   const marcas = await response.json();
   const selectMarca = document.getElementById('marca');
