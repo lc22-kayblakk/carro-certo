@@ -1,58 +1,45 @@
 
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
   background: #fdfdfd;
   margin: 0;
   padding: 0;
-  color: #222;
+  color: #333;
 }
 header {
-  background: #d32f2f;
+  background: #b71c1c;
   color: white;
-  padding: 2rem;
   text-align: center;
+  padding: 2rem;
 }
-header h1 {
+.logo {
+  max-height: 80px;
+  margin-bottom: 1rem;
+}
+h1 {
   margin: 0;
-  font-size: 2.5rem;
 }
-.banner img {
-  width: 100%;
-  max-height: 280px;
-  object-fit: cover;
-}
-.intro, .fipe, #checklist, #resultado {
-  padding: 1.5rem;
+section {
   max-width: 800px;
-  margin: auto;
-}
-h2 {
-  color: #c62828;
-}
-select, label, button {
-  display: block;
-  margin: 1rem 0;
+  margin: 2rem auto;
+  padding: 1rem;
 }
 button {
-  background: #d32f2f;
+  background: #b71c1c;
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
-button:hover {
-  background: #b71c1c;
-}
 .resultado {
-  background: #fff3e0;
-  border-left: 5px solid #ff9800;
+  font-size: 1.2rem;
+  background: #fff3cd;
   padding: 1rem;
-  font-weight: bold;
+  border-left: 5px solid #ffecb5;
 }
 footer {
   background: #eee;
-  text-align: center;
   padding: 1rem;
-  margin-top: 2rem;
+  text-align: center;
 }

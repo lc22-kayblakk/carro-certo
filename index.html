@@ -2,58 +2,37 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Carro Certo - Guia de Compra</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carro Certo</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>🚗 Carro Certo</h1>
-    <p>Seu guia inteligente para comprar o carro ideal com segurança e economia.</p>
+    <img src="logo.png" alt="Logo Carro Certo" class="logo">
+    <h1>Carro Certo</h1>
+    <p>Guia inteligente para comprar um veículo usado com segurança</p>
   </header>
 
-  <section class="banner">
-    <img src="car-banner.jpg" alt="Compra de Carro" />
+  <section class="fipe-form">
+    <h2>Escolha o veículo</h2>
+    <select id="marca"></select>
+    <select id="modelo"></select>
+    <select id="ano"></select>
   </section>
 
-  <section class="intro">
-    <h2>Por que usar o Carro Certo?</h2>
-    <ul>
-      <li>✅ Carros desvalorizam rápido — negocie com consciência.</li>
-      <li>✅ Evite surpresas com nosso checklist de pontos críticos.</li>
-      <li>✅ Veja o valor estimado com base na Tabela FIPE e estado do veículo.</li>
-    </ul>
-  </section>
-
-  <section class="fipe">
-    <h2>Escolha seu veículo</h2>
-    <label>Marca:
-      <select id="marca"></select>
-    </label>
-    <label>Modelo:
-      <select id="modelo"></select>
-    </label>
-    <label>Ano:
-      <select id="ano"></select>
-    </label>
-  </section>
-
-  <section id="checklist">
-    <h2>Checklist do Veículo</h2>
-    <p>Marque os problemas encontrados:</p>
-    <label><input type="checkbox" value="5"> Pneus desgastados (-5%)</label>
-    <label><input type="checkbox" value="10"> Pintura ruim ou amassados (-10%)</label>
-    <label><input type="checkbox" value="7"> Interior mal conservado (-7%)</label>
-    <label><input type="checkbox" value="8"> Manutenção irregular (-8%)</label>
-    <label><input type="checkbox" value="5"> Histórico de batida (-5%)</label>
-    <button onclick="calcularValorJusto()">Calcular Valor Sugerido</button>
+  <section class="checklist">
+    <h2>Checklist de Avaliação</h2>
+    <div id="checklist-container">
+      <!-- Campos dinâmicos do checklist aparecerão aqui -->
+    </div>
+    <button onclick="calcularValor()">Calcular valor estimado</button>
   </section>
 
   <section id="resultado" class="resultado"></section>
 
   <footer>
-    <p>© 2025 Carro Certo — Dados via Tabela FIPE + BrasilAPI</p>
+    <p>© 2025 Carro Certo - Todos os direitos reservados.</p>
   </footer>
 
   <script src="script.js"></script>
