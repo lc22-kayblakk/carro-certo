@@ -2,7 +2,7 @@
 const apiUrl = 'https://parallelum.com.br/fipe/api/v1/carros';
 
 async function carregarMarcas() {
-  const response = await fetch(`${apiUrl}/marcas`);
+  const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas`);
   const marcas = await response.json();
   const selectMarca = document.getElementById('marca');
   marcas.forEach(marca => {
@@ -15,7 +15,7 @@ async function carregarMarcas() {
 
 async function carregarModelos() {
   const marcaId = document.getElementById('marca').value;
-  const response = await fetch(`${apiUrl}/marcas/modelos`);
+  const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/59/modelos`);
   const modelos = await response.json();
   const selectModelo = document.getElementById('modelo');
   selectModelo.innerHTML = '';
@@ -30,7 +30,7 @@ async function carregarModelos() {
 async function carregarAnos() {
   const marcaId = document.getElementById('marca').value;
   const modeloId = document.getElementById('modelo').value;
-  const response = await fetch(`${apiUrl}/marcas/${marcaId}/modelos/${modeloId}/anos`);
+  const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/59/modelos/5940/anos`);
   const anos = await response.json();
   const selectAno = document.getElementById('ano');
   selectAno.innerHTML = '';
@@ -46,7 +46,7 @@ async function obterValorFipe() {
   const marcaId = document.getElementById('marca').value;
   const modeloId = document.getElementById('modelo').value;
   const anoId = document.getElementById('ano').value;
-  const response = await fetch(`${apiUrl}/marcas/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
+  const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/59/modelos/5940/anos/2014-3`);
   const dados = await response.json();
   return dados.preco;
 }
