@@ -88,9 +88,9 @@ function calcularValor() {
     const condicao = document.getElementById(`item-${i}`).value;
     desconto -= item.pesos[condicao] || 0;
   });
-  const valorFinal = valorFipe * (1 - desconto / 100);
+  const valorFinal = valorFipe * (1 + desconto / 100);
   document.getElementById("resultado").innerHTML =
-    `Valor estimado com base no estado do veículo: R$ ${valorFinal.toFixed(2).replace('.' ',')}`;
+    `Valor estimado com base no estado do veículo: R$ ${valorFinal.toFixed(2).replace('.',',')}`;
 }
 
 window.onload = () => {
