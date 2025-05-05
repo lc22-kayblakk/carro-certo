@@ -1,56 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Carro Certo - Guia de Compra</title>
-  <link rel="icon" href="logo.png" type="image/png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
-<body style="background-color: #1e1e1e; color: white;">
-  <nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top" />
-        Carro Certo
-      </a>
-    </div>
-  </nav>
+<body>
+  <header class="text-center py-4">
+    <img src="logo.png" alt="Logo Carro Certo" style="height: 80px;" />
+    <h1>Carro Certo</h1>
+    <p>Checklist e Avaliação de Veículos</p>
+  </header>
 
-  <div class="container my-5">
-    <h2 class="mb-4">Checklist de Compra de Veículo</h2>
-
-    <!-- Seletor de Veículo -->
-    <div class="card bg-dark text-white p-4 mb-4">
-      <h4 class="mb-3">Escolha o Veículo</h4>
-      <div class="mb-3">
-        <label for="marca" class="form-label">Marca:</label>
-        <select class="form-select" id="marca"></select>
+  <main class="container my-4">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="marca" class="form-label">Marca</label>
+        <select id="marca" class="form-select">
+          <option value="">Selecione a marca</option>
+        </select>
       </div>
-      <div class="mb-3">
-        <label for="modelo" class="form-label">Modelo:</label>
-        <select class="form-select" id="modelo"></select>
+      <div class="col-md-4">
+        <label for="modelo" class="form-label">Modelo</label>
+        <select id="modelo" class="form-select" disabled>
+          <option value="">Selecione o modelo</option>
+        </select>
       </div>
-      <div class="mb-3">
-        <label for="ano" class="form-label">Ano:</label>
-        <select class="form-select" id="ano"></select>
+      <div class="col-md-4">
+        <label for="ano" class="form-label">Ano</label>
+        <select id="ano" class="form-select" disabled>
+          <option value="">Selecione o ano</option>
+        </select>
       </div>
     </div>
 
-    <!-- Aqui vai o checklist futuramente -->
-
-    <!-- Resultado FIPE e Estimativa -->
-    <div id="resultado" class="card bg-dark text-white p-4 mt-4 d-none">
-      <h4>Resultado da Avaliação</h4>
-      <p><strong>Valor FIPE:</strong> <span id="valorFipe"></span></p>
-      <p><strong>Valor Estimado:</strong> <span id="valorEstimado"></span></p>
+    <div id="checklist" class="my-4">
+      <h4>Checklist do Veículo</h4>
+      <form id="formChecklist">
+        <div class="mb-3">
+          <label for="lataria" class="form-label">Lataria</label>
+          <select name="lataria" class="form-select">
+            <option value="bom">Bom</option>
+            <option value="regular">Regular</option>
+            <option value="ruim">Ruim</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="motor" class="form-label">Motor</label>
+          <select name="motor" class="form-select">
+            <option value="bom">Bom</option>
+            <option value="regular">Regular</option>
+            <option value="ruim">Ruim</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="interior" class="form-label">Interior</label>
+          <select name="interior" class="form-select">
+            <option value="bom">Bom</option>
+            <option value="regular">Regular</option>
+            <option value="ruim">Ruim</option>
+          </select>
+        </div>
+        <!-- Adicione mais itens conforme a planilha -->
+        <button type="submit" class="btn btn-danger mt-3">Calcular Valor Estimado</button>
+      </form>
     </div>
-  </div>
 
-  <footer class="text-center text-light py-4 bg-dark mt-5">
-    <p class="mb-0">© 2025 Carro Certo | Desenvolvido por @lc22-kayblakk</p>
+    <div id="resultado" class="alert alert-info d-none"></div>
+  </main>
+
+  <footer class="text-center py-3">
+    <small>&copy; 2025 Carro Certo. Todos os direitos reservados.</small>
   </footer>
 
   <script src="script.js"></script>
