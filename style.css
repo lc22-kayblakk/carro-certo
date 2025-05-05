@@ -1,36 +1,34 @@
 
 body {
-  font-family: Arial, sans-serif;
-  background: #fdfdfd;
-  margin: 0;
-  padding: 0;
-  color: #333;
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
 }
+
 header {
-  background: #b71c1c;
-  color: white;
-  text-align: center;
-  padding: 2rem;
+    background-color: #e10600;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    border-bottom: 2px solid #fff;
 }
-.logo {
-  max-height: 80px;
-  margin-bottom: 1rem;
+
+select, input, button {
+    border-radius: 10px;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    outline: none;
 }
-h1 {
-  margin: 0;
-}
-section {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
-}
+
 button {
-  background: #b71c1c;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+    background-color: #e10600;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #c00000;
 }
 .resultado {
   font-size: 1.2rem;
