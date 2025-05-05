@@ -1,99 +1,95 @@
 
-let marcas, modelos, anos, valorFipe = 0;
-const checklistData = [
-  { item: "Pneus e Rodas", pesos: { bom: 0, regular: -2, ruim: -5 } },
-  { item: "Suspensão", pesos: { bom: 0, regular: -3, ruim: -6 } },
-  { item: "Freios", pesos: { bom: 0, regular: -3, ruim: -7 } },
-  { item: "Lataria e Pintura", pesos: { bom: 0, regular: -4, ruim: -10 } },
-  { item: "Interior", pesos: { bom: 0, regular: -2, ruim: -5 } },
-  { item: "Documentação", pesos: { bom: 0, regular: -5, ruim: -10 } }
-];
+const marcaSelect = document.getElementById('marca');
+const modeloSelect = document.getElementById('modelo');
+const anoSelect = document.getElementById('ano');
+const resultadoDiv = document.getElementById('resultado');
+
+let valorFipe = 0;
+
+// Pesos do checklist
+const pesos = {
+  bom: 1,
+  regular: 0.9,
+  ruim: 0.75
+};
 
 async function carregarMarcas() {
   const res = await fetch("https://parallelum.com.br/fipe/api/v1/carros/marcas");
-  const data = await res.json();
-  const marcaSelect = document.getElementById("marca");
-  marcaSelect.innerHTML = "<option value=''>Selecione a marca</option>";
-  data.forEach(marca => {
-    const opt = document.createElement("option");
-    opt.value = marca.codigo;
-    opt.textContent = marca.nome;
-    marcaSelect.appendChild(opt);
+  const marcas = await res.json();
+  marcas.forEach(marca => {
+    const option = document.createElement("option");
+    option.value = marca.codigo;
+    option.text = marca.nome;
+    marcaSelect.appendChild(option);
   });
-  marcaSelect.onchange = carregarModelos;
 }
 
-async function carregarModelos() {
-  const marca = document.getElementById("marca").value;
-  if (!marca) return;
-  const res = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marca}/modelos`);
-  const data = await res.json();
-  const modeloSelect = document.getElementById("modelo");
+marcaSelect.addEventListener("change", async () => {
+  modeloSelect.disabled = true;
+  anoSelect.disabled = true;
+  modeloSelect.innerHTML = "<option value=''>Carregando modelos...</option>";
+
+  const res = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos`);
+  const modelos = await res.json();
+
   modeloSelect.innerHTML = "<option value=''>Selecione o modelo</option>";
-  data.modelos.forEach(mod => {
-    const opt = document.createElement("option");
-    opt.value = mod.codigo;
-    opt.textContent = mod.nome;
-    modeloSelect.appendChild(opt);
+  modelos.modelos.forEach(modelo => {
+    const option = document.createElement("option");
+    option.value = modelo.codigo;
+    option.text = modelo.nome;
+    modeloSelect.appendChild(option);
   });
-  modeloSelect.onchange = carregarAnos;
-}
 
-async function carregarAnos() {
-  const marca = document.getElementById("marca").value;
-  const modelo = document.getElementById("modelo").value;
-  if (!modelo) return;
-  const res = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marca}/modelos/${modelo}/anos`);
-  const data = await res.json();
-  const anoSelect = document.getElementById("ano");
+  modeloSelect.disabled = false;
+});
+
+modeloSelect.addEventListener("change", async () => {
+  anoSelect.disabled = true;
+  anoSelect.innerHTML = "<option value=''>Carregando anos...</option>";
+
+  const res = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`);
+  const anos = await res.json();
+
   anoSelect.innerHTML = "<option value=''>Selecione o ano</option>";
-  data.forEach(ano => {
-    const opt = document.createElement("option");
-    opt.value = ano.codigo;
-    opt.textContent = ano.nome;
-    anoSelect.appendChild(opt);
+  anos.forEach(ano => {
+    const option = document.createElement("option");
+    option.value = ano.codigo;
+    option.text = ano.nome;
+    anoSelect.appendChild(option);
   });
-  anoSelect.onchange = carregarValorFipe;
-}
 
-async function carregarValorFipe() {
-  const marca = document.getElementById("marca").value;
-  const modelo = document.getElementById("modelo").value;
-  const ano = document.getElementById("ano").value;
-  if (!ano) return;
-  const res = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marca}/modelos/${modelo}/anos/${ano}`);
-  const data = await res.json();
-  valorFipe = parseFloat(data.Valor.replace("R$", "").replace(".", "").replace(",", "."));
-}
+  anoSelect.disabled = false;
+});
 
-function gerarChecklist() {
-  const container = document.getElementById("checklist-container");
-  checklistData.forEach((item, i) => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <label>${item.item}</label>
-      <select id="item-${i}">
-        <option value="bom">Bom</option>
-        <option value="regular">Regular</option>
-        <option value="ruim">Ruim</option>
-      </select>
-    `;
-    container.appendChild(div);
+anoSelect.addEventListener("change", async () => {
+  const res = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`);
+  const dados = await res.json();
+  valorFipe = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
+});
+
+document.getElementById('formChecklist').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  if (valorFipe === 0) {
+    resultadoDiv.classList.remove('d-none', 'alert-success');
+    resultadoDiv.classList.add('alert-warning');
+    resultadoDiv.innerText = "Selecione marca, modelo e ano para calcular o valor.";
+    return;
+  }
+
+  let somaPesos = 0;
+  const selects = this.querySelectorAll("select");
+  selects.forEach(select => {
+    const valor = select.value;
+    somaPesos += pesos[valor];
   });
-}
 
-function calcularValor() {
-  let desconto = 0;
-  checklistData.forEach((item, i) => {
-    const condicao = document.getElementById(`item-${i}`).value;
-    desconto -= item.pesos[condicao] || 0;
-  });
-  const valorFinal = valorFipe * (1 + desconto / 100);
-  document.getElementById("resultado").innerHTML =
-    `Valor estimado com base no estado do veículo: R$ ${valorFinal.toFixed(2).replace('.',',')}`;
-}
+  const mediaPeso = somaPesos / selects.length;
+  const valorFinal = valorFipe * mediaPeso;
 
-window.onload = () => {
-  carregarMarcas();
-  gerarChecklist();
-};
+  resultadoDiv.classList.remove('d-none', 'alert-warning');
+  resultadoDiv.classList.add('alert-success');
+  resultadoDiv.innerText = `Valor estimado de compra: R$ ${valorFinal.toFixed(2).replace('.', ',')}`;
+});
+
+carregarMarcas();
