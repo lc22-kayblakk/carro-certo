@@ -23,3 +23,36 @@
     <h2 class="mb-4">Checklist de Compra de Veículo</h2>
 
     <!-- Seletor de Veículo -->
+    <div class="card bg-dark text-white p-4 mb-4">
+      <h4 class="mb-3">Escolha o Veículo</h4>
+      <div class="mb-3">
+        <label for="marca" class="form-label">Marca:</label>
+        <select class="form-select" id="marca"></select>
+      </div>
+      <div class="mb-3">
+        <label for="modelo" class="form-label">Modelo:</label>
+        <select class="form-select" id="modelo"></select>
+      </div>
+      <div class="mb-3">
+        <label for="ano" class="form-label">Ano:</label>
+        <select class="form-select" id="ano"></select>
+      </div>
+    </div>
+
+    <!-- Aqui vai o checklist futuramente -->
+
+    <!-- Resultado FIPE e Estimativa -->
+    <div id="resultado" class="card bg-dark text-white p-4 mt-4 d-none">
+      <h4>Resultado da Avaliação</h4>
+      <p><strong>Valor FIPE:</strong> <span id="valorFipe"></span></p>
+      <p><strong>Valor Estimado:</strong> <span id="valorEstimado"></span></p>
+    </div>
+  </div>
+
+  <footer class="text-center text-light py-4 bg-dark mt-5">
+    <p class="mb-0">© 2025 Carro Certo | Desenvolvido por @lc22-kayblakk</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
