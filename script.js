@@ -1,7 +1,7 @@
 
 let marcas, modelos, anos, valorFipe = 0;
 const checklistData = [
-  { item: "Pneus e Rodas", pesos: { bom: -5, regular: -2, ruim: -0 } },
+  { item: "Pneus e Rodas", pesos: { bom: 0, regular: -2, ruim: -5 } },
   { item: "Suspensão", pesos: { bom: 0, regular: -3, ruim: -6 } },
   { item: "Freios", pesos: { bom: 0, regular: -3, ruim: -7 } },
   { item: "Lataria e Pintura", pesos: { bom: 0, regular: -4, ruim: -10 } },
