@@ -1,91 +1,82 @@
+const checklistItens = [
+  "Pneus", "Rodas", "Suspensão", "Freios", 
+  "Lataria", "Pintura", "Interior", "Documentação"
+];
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const marcaSelect = document.getElementById("marca");
   const modeloSelect = document.getElementById("modelo");
   const anoSelect = document.getElementById("ano");
-  const resultadoFipe = document.getElementById("valorFipe");
-  const resultadoEstimado = document.getElementById("valorEstimado");
-  const checklistForm = document.getElementById("checklistForm");
+  const checklistDiv = document.getElementById("checklist");
 
-  // Carregar marcas
-  fetch("https://parallelum.com.br/fipe/api/v1/carros/marcas")
-    .then(res => res.json())
-    .then(data => {
-      data.forEach(marca => {
-        const option = document.createElement("option");
-        option.value = marca.codigo;
-        option.text = marca.nome;
-        marcaSelect.add(option);
-      });
+  // Monta o checklist
+  checklistItens.forEach(item => {
+    checklistDiv.innerHTML += `
+      <div class="form-check">
+        <label class="form-label">${item}</label>
+        <select class="form-select checklist-opcao" data-item="${item}">
+          <option value="bom">Bom</option>
+          <option value="regular">Regular</option>
+          <option value="ruim">Ruim</option>
+        </select>
+      </div>
+    `;
+  });
+
+  // Carrega marcas
+  const marcas = await fetch("https://parallelum.com.br/fipe/api/v1/carros/marcas").then(r => r.json());
+  marcas.forEach(m => {
+    marcaSelect.innerHTML += `<option value="${m.codigo}">${m.nome}</option>`;
+  });
+
+  marcaSelect.addEventListener("change", async () => {
+    modeloSelect.innerHTML = `<option>Carregando...</option>`;
+    const modelos = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos`)
+      .then(r => r.json());
+    modeloSelect.innerHTML = "";
+    modelos.modelos.forEach(m => {
+      modeloSelect.innerHTML += `<option value="${m.codigo}">${m.nome}</option>`;
     });
-
-  // Carregar modelos
-  marcaSelect.addEventListener("change", () => {
-    modeloSelect.innerHTML = "<option value=''>Selecione o modelo</option>";
-    anoSelect.innerHTML = "<option value=''>Selecione o ano</option>";
-    if (marcaSelect.value) {
-      fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos`)
-        .then(res => res.json())
-        .then(data => {
-          data.modelos.forEach(modelo => {
-            const option = document.createElement("option");
-            option.value = modelo.codigo;
-            option.text = modelo.nome;
-            modeloSelect.add(option);
-          });
-        });
-    }
   });
 
-  // Carregar anos
-  modeloSelect.addEventListener("change", () => {
-    anoSelect.innerHTML = "<option value=''>Selecione o ano</option>";
-    if (modeloSelect.value) {
-      fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`)
-        .then(res => res.json())
-        .then(data => {
-          data.forEach(ano => {
-            const option = document.createElement("option");
-            option.value = ano.codigo;
-            option.text = ano.nome;
-            anoSelect.add(option);
-          });
-        });
-    }
-  });
-
-  // Calcular valor estimado
-  anoSelect.addEventListener("change", () => {
-    if (anoSelect.value) {
-      fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`)
-        .then(res => res.json())
-        .then(data => {
-          resultadoFipe.innerText = data.Valor;
-          resultadoFipe.dataset.valor = parseFloat(data.Valor.replace("R$", "").replace(".", "").replace(",", "."));
-          calcularEstimativa();
-        });
-    }
-  });
-
-  // Atualizar valor estimado ao alterar checklist
-  checklistForm.addEventListener("change", () => {
-    calcularEstimativa();
-  });
-
-  function calcularEstimativa() {
-    const valorFipe = parseFloat(resultadoFipe.dataset.valor || 0);
-    if (valorFipe === 0) {
-      resultadoEstimado.innerText = "R$ 0,00";
-      return;
-    }
-
-    let desconto = 0;
-    const opcoes = checklistForm.querySelectorAll("input[type=checkbox]:checked");
-    opcoes.forEach(opcao => {
-      desconto += parseFloat(opcao.dataset.desconto || 0);
+  modeloSelect.addEventListener("change", async () => {
+    anoSelect.innerHTML = `<option>Carregando...</option>`;
+    const anos = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`)
+      .then(r => r.json());
+    anoSelect.innerHTML = "";
+    anos.forEach(a => {
+      anoSelect.innerHTML += `<option value="${a.codigo}">${a.nome}</option>`;
     });
+  });
 
-    const valorFinal = valorFipe * (1 - desconto);
-    resultadoEstimado.innerText = valorFinal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-  }
+  anoSelect.addEventListener("change", async () => {
+    const url = `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`;
+    const data = await fetch(url).then(r => r.json());
+    document.getElementById("valorFipe").textContent = data.Valor;
+    calcularEstimativa(data.Valor);
+  });
+
+  document.getElementById("checklistForm").addEventListener("change", () => {
+    const fipe = document.getElementById("valorFipe").textContent.replace("R$","").replace(".", "").replace(",", ".");
+    if (parseFloat(fipe) > 0) calcularEstimativa(`R$ ${fipe}`);
+  });
 });
+
+function calcularEstimativa(valorFipeStr) {
+  let valor = parseFloat(valorFipeStr.replace("R$", "").replace(".", "").replace(",", "."));
+  let desconto = 0;
+  const opcoes = document.querySelectorAll(".checklist-opcao");
+
+  opcoes.forEach(select => {
+    const val = select.value;
+    if (val === "regular") desconto += 0.03;
+    if (val === "ruim") desconto += 0.07;
+  });
+
+  const valorFinal = valor * (1 - desconto);
+  document.getElementById("valorEstimado").textContent = formatarValor(valorFinal);
+}
+
+function formatarValor(v) {
+  return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
