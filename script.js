@@ -1,82 +1,78 @@
-const checklistItens = [
-  "Pneus", "Rodas", "Suspensão", "Freios", 
-  "Lataria", "Pintura", "Interior", "Documentação"
-];
+const baseUrl = "https://parallelum.com.br/fipe/api/v1/carros";
+const marcaSelect = document.getElementById("marca");
+const modeloSelect = document.getElementById("modelo");
+const anoSelect = document.getElementById("ano");
+const resultadoDiv = document.getElementById("resultado");
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const marcaSelect = document.getElementById("marca");
-  const modeloSelect = document.getElementById("modelo");
-  const anoSelect = document.getElementById("ano");
-  const checklistDiv = document.getElementById("checklist");
+let valorFipeAtual = 0;
 
-  // Monta o checklist
-  checklistItens.forEach(item => {
-    checklistDiv.innerHTML += `
-      <div class="form-check">
-        <label class="form-label">${item}</label>
-        <select class="form-select checklist-opcao" data-item="${item}">
-          <option value="bom">Bom</option>
-          <option value="regular">Regular</option>
-          <option value="ruim">Ruim</option>
-        </select>
-      </div>
-    `;
-  });
-
-  // Carrega marcas
-  const marcas = await fetch("https://parallelum.com.br/fipe/api/v1/carros/marcas").then(r => r.json());
+async function carregarMarcas() {
+  const res = await fetch(`${baseUrl}/marcas`);
+  const marcas = await res.json();
+  marcaSelect.innerHTML = '<option selected>Selecione</option>';
   marcas.forEach(m => {
-    marcaSelect.innerHTML += `<option value="${m.codigo}">${m.nome}</option>`;
+    const opt = document.createElement("option");
+    opt.value = m.codigo;
+    opt.textContent = m.nome;
+    marcaSelect.appendChild(opt);
   });
+}
 
-  marcaSelect.addEventListener("change", async () => {
-    modeloSelect.innerHTML = `<option>Carregando...</option>`;
-    const modelos = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos`)
-      .then(r => r.json());
-    modeloSelect.innerHTML = "";
-    modelos.modelos.forEach(m => {
-      modeloSelect.innerHTML += `<option value="${m.codigo}">${m.nome}</option>`;
-    });
-  });
-
-  modeloSelect.addEventListener("change", async () => {
-    anoSelect.innerHTML = `<option>Carregando...</option>`;
-    const anos = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`)
-      .then(r => r.json());
-    anoSelect.innerHTML = "";
-    anos.forEach(a => {
-      anoSelect.innerHTML += `<option value="${a.codigo}">${a.nome}</option>`;
-    });
-  });
-
-  anoSelect.addEventListener("change", async () => {
-    const url = `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`;
-    const data = await fetch(url).then(r => r.json());
-    document.getElementById("valorFipe").textContent = data.Valor;
-    calcularEstimativa(data.Valor);
-  });
-
-  document.getElementById("checklistForm").addEventListener("change", () => {
-    const fipe = document.getElementById("valorFipe").textContent.replace("R$","").replace(".", "").replace(",", ".");
-    if (parseFloat(fipe) > 0) calcularEstimativa(`R$ ${fipe}`);
+marcaSelect.addEventListener("change", async () => {
+  const marcaId = marcaSelect.value;
+  const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos`);
+  const modelos = await res.json();
+  modeloSelect.innerHTML = '<option selected>Selecione</option>';
+  modelos.modelos.forEach(m => {
+    const opt = document.createElement("option");
+    opt.value = m.codigo;
+    opt.textContent = m.nome;
+    modeloSelect.appendChild(opt);
   });
 });
 
-function calcularEstimativa(valorFipeStr) {
-  let valor = parseFloat(valorFipeStr.replace("R$", "").replace(".", "").replace(",", "."));
-  let desconto = 0;
-  const opcoes = document.querySelectorAll(".checklist-opcao");
+modeloSelect.addEventListener("change", async () => {
+  const marcaId = marcaSelect.value;
+  const modeloId = modeloSelect.value;
+  const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos`);
+  const anos = await res.json();
+  anoSelect.innerHTML = '<option selected>Selecione</option>';
+  anos.forEach(a => {
+    const opt = document.createElement("option");
+    opt.value = a.codigo;
+    opt.textContent = a.nome;
+    anoSelect.appendChild(opt);
+  });
+});
 
-  opcoes.forEach(select => {
-    const val = select.value;
-    if (val === "regular") desconto += 0.03;
-    if (val === "ruim") desconto += 0.07;
+anoSelect.addEventListener("change", async () => {
+  const marcaId = marcaSelect.value;
+  const modeloId = modeloSelect.value;
+  const anoId = anoSelect.value;
+  const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
+  const dados = await res.json();
+  valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
+});
+
+document.getElementById("checklist-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const fatores = {
+    bom: 0,
+    regular: 0.05,
+    ruim: 0.10
+  };
+
+  const itens = document.querySelectorAll(".checklist-item");
+  let fatorTotal = 0;
+
+  itens.forEach(item => {
+    fatorTotal += fatores[item.value] || 0;
   });
 
-  const valorFinal = valor * (1 - desconto);
-  document.getElementById("valorEstimado").textContent = formatarValor(valorFinal);
-}
+  const valorFinal = valorFipeAtual * (1 - fatorTotal);
+  resultadoDiv.textContent = isNaN(valorFinal)
+    ? "Selecione marca, modelo e ano primeiro."
+    : `Valor estimado: R$ ${valorFinal.toFixed(2).replace(".", ",")}`;
+});
 
-function formatarValor(v) {
-  return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
+carregarMarcas();
