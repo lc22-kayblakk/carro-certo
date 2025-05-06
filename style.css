@@ -11,6 +11,6 @@ h1 {
 select.form-select {
   border-radius: 0.5rem;
   border: 2px solid #ff0000;
-  background-color: #1c1c1c;
-  color: white;
+  background-color: white;
+  color: #e60000;
 }
