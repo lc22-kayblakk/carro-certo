@@ -77,4 +77,3 @@ document.addEventListener("DOMContentLoaded", () => {
     valorFinalSpan.innerText = valorFinal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   });
 });
-"""
