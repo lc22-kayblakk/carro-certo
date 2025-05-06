@@ -3,6 +3,7 @@ const marcaSelect = document.getElementById("marca");
 const modeloSelect = document.getElementById("modelo");
 const anoSelect = document.getElementById("ano");
 const resultadoDiv = document.getElementById("resultado");
+const valorFipeDiv = document.getElementById("valor-fipe");
 
 let valorFipeAtual = 0;
 
@@ -52,6 +53,7 @@ anoSelect.addEventListener("change", async () => {
   const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
   const dados = await res.json();
   valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
+  valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
 });
 
 document.getElementById("checklist-form").addEventListener("submit", function (e) {
