@@ -58,13 +58,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   document.getElementById("checklistForm").addEventListener("change", () => {
-    const fipe = document.getElementById("valorFipe").textContent.replace("R$","").replace(".", "").replace(",", ".");
+    const fipe = document.getElementById("valorFipe").textContent.replace("R$","").replace(".","").replace(",",".");
     if (parseFloat(fipe) > 0) calcularEstimativa(`R$ ${fipe}`);
   });
 });
 
 function calcularEstimativa(valorFipeStr) {
-  let valor = parseFloat(valorFipeStr.replace("R$", "").replace(".", "").replace(",", "."));
+  let valor = parseFloat(valorFipeStr.replace("R$","").replace(".","").replace(",","."));
   let desconto = 0;
   const opcoes = document.querySelectorAll(".checklist-opcao");
 
