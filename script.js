@@ -52,7 +52,10 @@ anoSelect.addEventListener("change", async () => {
   const anoId = anoSelect.value;
   const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
   const dados = await res.json();
+
   valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
+
+  // EXIBE o valor original da FIPE na página
   valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
 });
 
