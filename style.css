@@ -1,5 +1,5 @@
 body {
-  background-color: #000000;
+  background-color: #f8f9fa;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -15,3 +15,4 @@ body {
 #checklist .form-check {
   margin-bottom: 12px;
 }
+
