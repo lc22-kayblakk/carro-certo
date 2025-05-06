@@ -1,18 +1,16 @@
 body {
-  background-color: #f8f9fa;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f0f0f;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.card {
-  border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+h1 {
+  color: #ff0000;
 }
 
-.form-select, .form-label {
+select.form-select {
   border-radius: 0.5rem;
+  border: 2px solid #ff0000;
+  background-color: #1c1c1c;
+  color: white;
 }
-
-#checklist .form-check {
-  margin-bottom: 12px;
-}
-
