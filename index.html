@@ -34,17 +34,36 @@
     </div>
 
     <!-- Checklist -->
-    <div class="card p-3 mb-4">
-      <h4>2. Checklist do veículo</h4>
-      <form id="checklistForm">
-        <div class="row">
-          <!-- Itens do checklist -->
-          <div class="col-md-6 mb-3" id="checklist">
-            <!-- Será preenchido via JS -->
-          </div>
-        </div>
-      </form>
-    </div>
+    <h4 class="mt-4">Checklist de Avaliação</h4>
+
+<div class="form-check">
+  <input class="form-check-input checklist" type="checkbox" id="pneuRuim" data-desconto="0.02">
+  <label class="form-check-label" for="pneuRuim">Pneus - Ruim (-2%)</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input checklist" type="checkbox" id="rodasRuim" data-desconto="0.01">
+  <label class="form-check-label" for="rodasRuim">Rodas - Ruim (-1%)</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input checklist" type="checkbox" id="suspensaoRuim" data-desconto="0.03">
+  <label class="form-check-label" for="suspensaoRuim">Suspensão - Ruim (-3%)</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input checklist" type="checkbox" id="freiosRuim" data-desconto="0.02">
+  <label class="form-check-label" for="freiosRuim">Freios - Ruim (-2%)</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input checklist" type="checkbox" id="latariaRuim" data-desconto="0.03">
+  <label class="form-check-label" for="latariaRuim">Lataria/Pintura - Ruim (-3%)</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input checklist" type="checkbox" id="interiorRuim" data-desconto="0.01">
+  <label class="form-check-label" for="interiorRuim">Interior - Ruim (-1%)</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input checklist" type="checkbox" id="documentacaoIrregular" data-desconto="0.05">
+  <label class="form-check-label" for="documentacaoIrregular">Documentação Irregular (-5%)</label>
+</div>
 
     <!-- Resultado -->
     <div class="card p-3 text-center">
