@@ -61,11 +61,14 @@ anoSelect.addEventListener("change", async () => {
 
 document.getElementById("checklist-form").addEventListener("submit", function (e) {
   e.preventDefault();
-  const fatores = {
-    bom: 0,
-    regular: 0.05,
-    ruim: 0.10
-  };
+  itens.forEach(item => {
+  const valor = item.value;
+  if (valor === "regular") {
+    fatorTotal += parseFloat(item.dataset.regular || 0);
+  } else if (valor === "ruim") {
+    fatorTotal += parseFloat(item.dataset.ruim || 0);
+  }
+});
 
   const itens = document.querySelectorAll(".checklist-item");
   let fatorTotal = 0;
