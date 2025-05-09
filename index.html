@@ -51,16 +51,14 @@
   <label class="form-label">Vazamento de óleo</label>
   <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
     <option value="bom">Não</option>
-    <option value="regular">Pequeno</option>
     <option value="ruim">Sim</option>
   </select>
 </div>
 
 <div class="col-md-6">
-  <label class="form-label">Vazamento de água</label>
+  <label class="form-label">Vazamento de Liquido de Arrefecimento</label>
   <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
     <option value="bom">Não</option>
-    <option value="regular">Leve</option>
     <option value="ruim">Sim</option>
   </select>
 </div>
@@ -68,9 +66,8 @@
 <div class="col-md-6">
   <label class="form-label">Ruído no motor</label>
   <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
-    <option value="bom">Sem ruído</option>
-    <option value="regular">Leve</option>
-    <option value="ruim">Alto</option>
+    <option value="bom">Sem Ruído</option>
+    <option value="ruim">Batidas Metálicas</option>
   </select>
 </div>
 
@@ -82,18 +79,18 @@
 <div class="col-md-6">
   <label class="form-label">Funilaria geral</label>
   <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
-    <option value="bom">Boa</option>
-    <option value="regular">Marcas leves</option>
-    <option value="ruim">Amassada</option>
+    <option value="bom">Boas condições</option>
+    <option value="regular">Pequenos Detalhes</option>
+    <option value="ruim">Colisão</option>
   </select>
 </div>
 
 <div class="col-md-6">
   <label class="form-label">Estado da pintura</label>
   <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
-    <option value="bom">Boa</option>
-    <option value="regular">Desgastada</option>
-    <option value="ruim">Rachada/Falhada</option>
+    <option value="bom">Boas condições</option>
+    <option value="regular">Com Queimados</option>
+    <option value="ruim">Rachada</option>
   </select>
 </div>
 
@@ -105,18 +102,18 @@
 <div class="col-md-6">
   <label class="form-label">Bancos e estofado</label>
   <select class="form-select checklist-item" data-regular="0.015" data-ruim="0.03">
-    <option value="bom">Bom</option>
-    <option value="regular">Raspado</option>
+    <option value="bom">Boas Condições</option>
+    <option value="regular">Furado</option>
     <option value="ruim">Rasgado</option>
   </select>
 </div>
 
 <div class="col-md-6">
-  <label class="form-label">Painel e acabamento</label>
+  <label class="form-label">Painel e acabamentos</label>
   <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.025">
-    <option value="bom">Bom</option>
-    <option value="regular">Marcas leves</option>
-    <option value="ruim">Trincado/danificado</option>
+    <option value="bom">Boas Condições</option>
+    <option value="regular">Pequenos Detalhes</option>
+    <option value="ruim">Trincado/Danificado</option>
   </select>
 </div>
 
@@ -125,7 +122,7 @@
   <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
     <option value="bom">Funcionando</option>
     <option value="regular">Intermitente</option>
-    <option value="ruim">Com falhas</option>
+    <option value="ruim">Com Falhas</option>
   </select>
 </div>
         
@@ -136,10 +133,11 @@
 
 <div class="col-md-6">
   <label class="form-label">Pneus</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04" data-grande="0.07">
     <option value="bom">Novos</option>
-    <option value="regular">Meia vida</option>
+    <option value="regular">Meia Vida</option>
     <option value="ruim">Desgastados</option>
+    <option value="grande">Remold(Remoldado)</option>
   </select>
 </div>
 
@@ -195,6 +193,15 @@
     <option value="bom">Não teve contato com água</option>
     <option value="regular">Teve contato leve (sem danos)</option>
     <option value="ruim">Já passou por alagamento e foi restaurado</option>
+  </select>
+</div>
+        
+        <div class="col-md-6">
+  <label class="form-label">Luz da injeção</label>
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.10">
+    <option value="bom">Apagada</option>
+    <option value="regular">Lâmpada Removida</option>
+    <option value="ruim">Acessa</option>
   </select>
 </div>
         
