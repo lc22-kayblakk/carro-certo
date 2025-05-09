@@ -33,13 +33,30 @@
 
     <form id="checklist-form" class="mb-4">
       <div id="itens-checklist" class="row g-3">
-      <!-- Categoria Motor -->
+      <!-- Categoria 🔧 Motor -->
 <div class="col-12">
   <h5 class="mt-4 text-danger">Motor</h5>
 </div>
 
+        <div class="col-md-6">
+  <label class="form-label">Funcionamento do motor</label>
+  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
+    <option value="bom">Bom</option>
+    <option value="regular">Regular</option>
+    <option value="ruim">Ruim</option>
+  </select>
+</div>
+        
 <div class="col-md-6">
   <label class="form-label">Vazamento de óleo</label>
+  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
+    <option value="bom">SIM</option>
+    <option value="ruim">NÃO</option>
+  </select>
+</div>
+        
+        <div class="col-md-6">
+  <label class="form-label">Vazamento de Água</label>
   <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
     <option value="bom">SIM</option>
     <option value="ruim">NÃO</option>
@@ -49,61 +66,54 @@
 <div class="col-md-6">
   <label class="form-label">Ruído no motor</label>
   <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.08">
+    <option value="bom">SIM</option>
+    <option value="ruim">NÃO</option>
+  </select>
+</div>
+ <!-- Categoria 🖌️ Lataria e Pintura -->
+<div class="col-12">
+  <h5 class="mt-4 text-danger">Lataria e Pintura</h5>
+</div>
+
+<div class="col-md-6">
+  <label class="form-label">Funilaria geral</label>
+  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
     <option value="bom">Bom</option>
     <option value="regular">Regular</option>
     <option value="ruim">Ruim</option>
   </select>
 </div>
- 
-        <!-- Cada grupo do checklist -->
-        <div class="col-md-6">
-          <label class="form-label">Pneus e Rodas</label>
-          <select name="pneus" class="form-select checklist-item">
-            <option value="bom">Bom</option>
-            <option value="regular">Regular</option>
-            <option value="ruim">Ruim</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Suspensão</label>
-          <select name="suspensao" class="form-select checklist-item">
-            <option value="bom">Bom</option>
-            <option value="regular">Regular</option>
-            <option value="ruim">Ruim</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Freios</label>
-          <select name="freios" class="form-select checklist-item">
-            <option value="bom">Bom</option>
-            <option value="regular">Regular</option>
-            <option value="ruim">Ruim</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Lataria e Pintura</label>
-          <select name="lataria" class="form-select checklist-item">
-            <option value="bom">Bom</option>
-            <option value="regular">Regular</option>
-            <option value="ruim">Ruim</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Interior</label>
-          <select name="interior" class="form-select checklist-item">
-            <option value="bom">Bom</option>
-            <option value="regular">Regular</option>
-            <option value="ruim">Ruim</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Documentação</label>
-          <select name="documentacao" class="form-select checklist-item">
-            <option value="bom">Bom</option>
-            <option value="regular">Regular</option>
-            <option value="ruim">Ruim</option>
-          </select>
-        </div>
+
+<div class="col-md-6">
+  <label class="form-label">Estado da pintura</label>
+  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.08">
+    <option value="bom">Bom</option>
+    <option value="regular">Regular</option>
+    <option value="ruim">Ruim</option>
+  </select>
+</div>
+        <!-- Categoria 🛋️ Interior -->
+<div class="col-12">
+  <h5 class="mt-4 text-danger">Lataria e Pintura</h5>
+</div>
+
+<div class="col-md-6">
+  <label class="form-label">Funilaria geral</label>
+  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
+    <option value="bom">Bom</option>
+    <option value="regular">Regular</option>
+    <option value="ruim">Ruim</option>
+  </select>
+</div>
+
+<div class="col-md-6">
+  <label class="form-label">Estado da pintura</label>
+  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.08">
+    <option value="bom">Bom</option>
+    <option value="regular">Regular</option>
+    <option value="ruim">Ruim</option>
+  </select>
+</div>
 
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-danger px-5">Calcular Valor</button>
