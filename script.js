@@ -61,26 +61,22 @@ anoSelect.addEventListener("change", async () => {
 
 document.getElementById("checklist-form").addEventListener("submit", function (e) {
   e.preventDefault();
-  itens.forEach(item => {
-  const valor = item.value;
-  if (valor === "regular") {
-    fatorTotal += parseFloat(item.dataset.regular || 0);
-  } else if (valor === "ruim") {
-    fatorTotal += parseFloat(item.dataset.ruim || 0);
-  }
-});
-
   const itens = document.querySelectorAll(".checklist-item");
   let fatorTotal = 0;
 
   itens.forEach(item => {
-    fatorTotal += fatores[item.value] || 0;
+    const valor = item.value;
+    if (valor === "regular") {
+      fatorTotal += parseFloat(item.dataset.regular || 0);
+    } else if (valor === "ruim") {
+      fatorTotal += parseFloat(item.dataset.ruim || 0);
+    }
   });
 
   const valorFinal = valorFipeAtual * (1 - fatorTotal);
   resultadoDiv.textContent = isNaN(valorFinal)
     ? "Selecione marca, modelo e ano primeiro."
-    : `Valor estimado: R$ ${valorFinal.toFixed(2).replace(".", ",")}`;
+    : `Valor estimado de compra: R$ ${valorFinal.toFixed(2).replace(".", ",")}`;
 });
 
 carregarMarcas();
