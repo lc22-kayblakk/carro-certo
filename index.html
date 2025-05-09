@@ -33,134 +33,139 @@
 
     <form id="checklist-form" class="mb-4">
       <div id="itens-checklist" class="row g-3">
-      <!-- Categoria 🔧Motor -->
+      <!-- 🔧 Motor -->
 <div class="col-12">
-  <h5 class="mt-4 text-danger">🔧Motor</h5>
+  <h5 class="mt-4 text-danger">🔧 Motor</h5>
 </div>
 
-        <div class="col-md-6">
+<div class="col-md-6">
   <label class="form-label">Funcionamento do motor</label>
-  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
+  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.06">
     <option value="bom">Bom</option>
     <option value="regular">Regular</option>
     <option value="ruim">Ruim</option>
   </select>
 </div>
-        
+
 <div class="col-md-6">
   <label class="form-label">Vazamento de óleo</label>
-  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
-    <option value="bom">Sim</option>
-    <option value="ruim">Não</option>
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
+    <option value="bom">Não</option>
+    <option value="regular">Pequeno</option>
+    <option value="ruim">Sim</option>
   </select>
 </div>
-        
-        <div class="col-md-6">
-  <label class="form-label">Vazamento de Água</label>
-  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
-    <option value="bom">Sim</option>
-    <option value="ruim">Não</option>
+
+<div class="col-md-6">
+  <label class="form-label">Vazamento de água</label>
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
+    <option value="bom">Não</option>
+    <option value="regular">Leve</option>
+    <option value="ruim">Sim</option>
   </select>
 </div>
 
 <div class="col-md-6">
   <label class="form-label">Ruído no motor</label>
-  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.08">
-    <option value="bom">Sim</option>
-    <option value="ruim">Não</option>
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
+    <option value="bom">Sem ruído</option>
+    <option value="regular">Leve</option>
+    <option value="ruim">Alto</option>
   </select>
 </div>
- <!-- Categoria 🖌️Lataria e Pintura -->
+
+<!-- 🖌️ Lataria e Pintura -->
 <div class="col-12">
-  <h5 class="mt-4 text-danger">🖌️Lataria e Pintura</h5>
+  <h5 class="mt-4 text-danger">🖌️ Lataria e Pintura</h5>
 </div>
 
 <div class="col-md-6">
   <label class="form-label">Funilaria geral</label>
-  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
-    <option value="bom">Bom</option>
-    <option value="regular">Regular</option>
-    <option value="ruim">Ruim</option>
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
+    <option value="bom">Boa</option>
+    <option value="regular">Marcas leves</option>
+    <option value="ruim">Amassada</option>
   </select>
 </div>
 
 <div class="col-md-6">
   <label class="form-label">Estado da pintura</label>
-  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.08">
-    <option value="bom">Bom</option>
-    <option value="regular">Regular</option>
-    <option value="ruim">Ruim</option>
+  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
+    <option value="bom">Boa</option>
+    <option value="regular">Desgastada</option>
+    <option value="ruim">Rachada/Falhada</option>
   </select>
 </div>
-        <!-- Categoria 🛋️Interior -->
+
+<!-- 🛋️ Interior -->
 <div class="col-12">
-  <h5 class="mt-4 text-danger">🛋️Interior</h5>
+  <h5 class="mt-4 text-danger">🛋️ Interior</h5>
 </div>
 
 <div class="col-md-6">
   <label class="form-label">Bancos e estofado</label>
-  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
+  <select class="form-select checklist-item" data-regular="0.015" data-ruim="0.03">
     <option value="bom">Bom</option>
-    <option value="regular">Regular</option>
-    <option value="ruim">Ruim</option>
+    <option value="regular">Raspado</option>
+    <option value="ruim">Rasgado</option>
   </select>
 </div>
 
 <div class="col-md-6">
   <label class="form-label">Painel e acabamento</label>
-  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.08">
+  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.025">
     <option value="bom">Bom</option>
-    <option value="regular">Regular</option>
-    <option value="ruim">Ruim</option>
+    <option value="regular">Marcas leves</option>
+    <option value="ruim">Trincado/danificado</option>
   </select>
 </div>
-        <div class="col-md-6">
+
+<div class="col-md-6">
   <label class="form-label">Sistema elétrico interno</label>
-  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.08">
-    <option value="bom">Bom</option>
-    <option value="regular">Regular</option>
-    <option value="ruim">Ruim</option>
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
+    <option value="bom">Funcionando</option>
+    <option value="regular">Intermitente</option>
+    <option value="ruim">Com falhas</option>
   </select>
 </div>
-        
- <!-- Categoria 🛞Pneus e Rodas -->
+
+<!-- 🛞 Pneus e Rodas -->
 <div class="col-12">
-  <h5 class="mt-4 text-danger">🛞Pneus e Rodas</h5>
+  <h5 class="mt-4 text-danger">🛞 Pneus e Rodas</h5>
 </div>
 
 <div class="col-md-6">
   <label class="form-label">Pneus</label>
-  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
-    <option value="bom">Bom</option>
-    <option value="regular">regular</option>
-    <option value="ruim">Ruim</option>
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
+    <option value="bom">Novos</option>
+    <option value="regular">Meia vida</option>
+    <option value="ruim">Desgastados</option>
   </select>
 </div>
 
 <div class="col-md-6">
   <label class="form-label">Rodas</label>
-  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.08">
-    <option value="bom">Bom</option>
-    <option value="regular">Regular</option>
-    <option value="ruim">Ruim</option>
+  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
+    <option value="bom">Boas</option>
+    <option value="regular">Arranhadas</option>
+    <option value="ruim">Trincadas</option>
   </select>
 </div>
 
-         <!-- Categoria 🛠️Suspensão -->
+<!-- 🛠️ Suspensão -->
 <div class="col-12">
-  <h5 class="mt-4 text-danger">🛠️Suspensão</h5>
+  <h5 class="mt-4 text-danger">🛠️ Suspensão</h5>
 </div>
 
 <div class="col-md-6">
-  <label class="form-label">Ruidos</label>
-  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.10">
-    <option value="bom">Sim</option>
-    <option value="regular">regular</option>
-    <option value="ruim">Não</option>
+  <label class="form-label">Ruídos</label>
+  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
+    <option value="bom">Sem ruído</option>
+    <option value="regular">Pequenos</option>
+    <option value="ruim">Fortes</option>
   </select>
 </div>
-
-        
+       
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-danger px-5">Calcular Valor</button>
       </div>
