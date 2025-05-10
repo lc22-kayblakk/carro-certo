@@ -20,8 +20,7 @@ async function carregarMarcas() {
 }
 
 marcaSelect.addEventListener("change", async () => {
-  const marcaId = marcaSelect.value;
-  const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos`);
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos`);
   const modelos = await res.json();
   modeloSelect.innerHTML = '<option selected>Selecione</option>';
   modelos.modelos.forEach(m => {
@@ -33,9 +32,7 @@ marcaSelect.addEventListener("change", async () => {
 });
 
 modeloSelect.addEventListener("change", async () => {
-  const marcaId = marcaSelect.value;
-  const modeloId = modeloSelect.value;
-  const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos`);
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`);
   const anos = await res.json();
   anoSelect.innerHTML = '<option selected>Selecione</option>';
   anos.forEach(a => {
@@ -47,15 +44,9 @@ modeloSelect.addEventListener("change", async () => {
 });
 
 anoSelect.addEventListener("change", async () => {
-  const marcaId = marcaSelect.value;
-  const modeloId = modeloSelect.value;
-  const anoId = anoSelect.value;
-  const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`);
   const dados = await res.json();
-
   valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
-
-  // EXIBE o valor original da FIPE na página
   valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
 });
 
@@ -72,13 +63,6 @@ document.getElementById("checklist-form").addEventListener("submit", function (e
       fatorTotal += parseFloat(item.dataset.ruim || 0);
     }
   });
-
-  const valorFinal = valorFipeAtual * (1 - fatorTotal);
-  resultadoDiv.textContent = isNaN(valorFinal)
-    ? "Selecione marca, modelo e ano primeiro."
-    : `Valor estimado de compra: R$ ${valorFinal.toFixed(2).replace(".", ",")}`;
-});
-
 
   const valorFinal = valorFipeAtual * (1 - fatorTotal);
   resultadoDiv.textContent = isNaN(valorFinal)
