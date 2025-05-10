@@ -83,13 +83,13 @@ document.getElementById("checklist-form").addEventListener("submit", function (e
   const valorDescontado = valorFipeAtual * fatorTotal;
   const valorFinal = valorFipeAtual - valorDescontado;
 
-  resultadoDiv.innerHTML = isNaN(valorFinal)
-    ? "Selecione marca, modelo e ano primeiro."
-    : `
-      <p><strong>Valor estimado de compra:</strong> R$ ${valorFinal.toFixed(2).replace(".", ",")}</p>
-      <p><strong>Desconto aplicado:</strong> R$ ${valorDescontado.toFixed(2).replace(".", ",")}</p>
-      <p><strong>Condição geral do carro:</strong> ${condicao}</p>
-    `;
+ resultadoDiv.innerHTML = isNaN(valorFinal)
+  ? "Selecione marca, modelo e ano primeiro."
+  : `
+    <p><strong>Valor estimado de compra:</strong> ${valorFinal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+    <p><strong>Desconto aplicado:</strong> ${valorDescontado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+    <p><strong>Condição geral do carro:</strong> ${condicao}</p>
+  `;
 });
 
 // Iniciar carregamento
