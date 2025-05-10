@@ -63,15 +63,39 @@ document.getElementById("checklist-form").addEventListener("submit", function (e
   e.preventDefault();
   const itens = document.querySelectorAll(".checklist-item");
   let fatorTotal = 0;
+  let notaTotal = 0;
 
   itens.forEach(item => {
     const valor = item.value;
     if (valor === "regular") {
       fatorTotal += parseFloat(item.dataset.regular || 0);
+      notaTotal += 1;
     } else if (valor === "ruim") {
       fatorTotal += parseFloat(item.dataset.ruim || 0);
+      notaTotal += 2;
+    } else {
+      notaTotal += 0;
     }
   });
+
+  const media = notaTotal / itens.length;
+
+  let condicao = "";
+  if (media <= 0.5) condicao = "Bom ✅";
+  else if (media <= 1.2) condicao = "Aceitável ⚠️";
+  else condicao = "Ruim ❌";
+
+  const valorDescontado = valorFipeAtual * fatorTotal;
+  const valorFinal = valorFipeAtual - valorDescontado;
+
+  resultadoDiv.innerHTML = isNaN(valorFinal)
+    ? "Selecione marca, modelo e ano primeiro."
+    : `
+      <p><strong>Valor estimado de compra:</strong> R$ ${valorFinal.toFixed(2).replace(".", ",")}</p>
+      <p><strong>Desconto aplicado:</strong> R$ ${valorDescontado.toFixed(2).replace(".", ",")}</p>
+      <p><strong>Condição geral do carro:</strong> ${condicao}</p>
+    `;
+});
 
   const valorFinal = valorFipeAtual * (1 - fatorTotal);
   resultadoDiv.textContent = isNaN(valorFinal)
