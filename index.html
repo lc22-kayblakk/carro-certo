@@ -240,6 +240,49 @@
 
 <div class="text-center fs-4" id="resultado"></div>
 <div class="text-center fs-5 mt-3" id="valor-fipe"></div>
+<div class="text-center fs-6 mt-2 text-warning" id="sugestao-negociacao"></div>
+
+    document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('checklist-form');
+  const resultadoDiv = document.getElementById('resultado');
+  const fipeDiv = document.getElementById('valor-fipe');
+  const sugestaoDiv = document.getElementById('sugestao-negociacao'); // <--- novo elemento no HTML
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const valorFipe = 30000; // Valor fixo temporário – substituir por valor dinâmico se desejar
+    let desconto = 0;
+
+    document.querySelectorAll('.checklist-item').forEach(item => {
+      const valor = item.value;
+      const data = item.dataset;
+      if (valor === 'regular') {
+        desconto += parseFloat(data.regular || 0);
+      } else if (valor === 'ruim') {
+        desconto += parseFloat(data.ruim || 0);
+      } else if (valor === 'grande') {
+        desconto += parseFloat(data.grande || 0);
+      }
+    });
+
+    const valorFinal = valorFipe * (1 - desconto);
+
+    resultadoDiv.textContent = Valor estimado: R$ ${valorFinal.toFixed(2)};
+    fipeDiv.textContent = Valor Tabela FIPE: R$ ${valorFipe.toFixed(2)};
+
+    // Sugestão de negociação
+    const diferenca = valorFipe - valorFinal;
+    if (diferenca > 3000) {
+      sugestaoDiv.textContent = "🚨 Alto nível de desvalorização detectado. Negocie com base nos defeitos apresentados.";
+    } else if (diferenca > 1000) {
+      sugestaoDiv.textContent = "⚠ Veículo com algumas falhas. Negociação razoável é recomendada.";
+    } else {
+      sugestaoDiv.textContent = "✅ Veículo com bom estado geral. Valor próximo ao ideal.";
+    }
+  });
+});
+    
 </div>
 
 <script src="script.js"></script>
