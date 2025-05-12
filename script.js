@@ -22,7 +22,7 @@ async function carregarMarcas() {
 
 // Carregar modelos
 marcaSelect.addEventListener("change", async () => {
-  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos`);
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect2.value}/modelos`);
   const modelos = await res.json();
   modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
   modelos.modelos.forEach(modelo => {
@@ -35,7 +35,7 @@ marcaSelect.addEventListener("change", async () => {
 
 // Carregar anos
 modeloSelect.addEventListener("change", async () => {
-  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`);
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect2.value}/modelos/${modeloSelect2.value}/anos`);
   const anos = await res.json();
   anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
   anos.forEach(ano => {
@@ -48,7 +48,7 @@ modeloSelect.addEventListener("change", async () => {
 
 // Buscar valor FIPE
 anoSelect.addEventListener("change", async () => {
-  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`);
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect2.value}/modelos/${modeloSelect2.value}/anos/${anoSelect2.value}`);
   const dados = await res.json();
   valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
   valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
