@@ -94,7 +94,6 @@ document.getElementById("checklist-form").addEventListener("submit", function (e
 
 // Iniciar carregamento
 carregarMarcas();
-
 $(document).ready(function () {
   $('.select2').select2({
     width: '100%',
