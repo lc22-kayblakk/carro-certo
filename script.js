@@ -44,6 +44,9 @@ modeloSelect.addEventListener("change", async () => {
     opt.textContent = ano.nome;
     anoSelect.appendChild(opt);
   });
+  
+  // 👇 Aqui atualiza o Select2
+$('#modelo').trigger('change.select2');
 });
 
 // Buscar valor FIPE
@@ -53,6 +56,9 @@ anoSelect.addEventListener("change", async () => {
   valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
   valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
 });
+
+// 👇 Aqui atualiza o Select2
+$('#ano').trigger('change.select2');
 
 // Cálculo final do checklist
 document.getElementById("checklist-form").addEventListener("submit", function (e) {
