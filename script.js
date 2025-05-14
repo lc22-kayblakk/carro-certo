@@ -1,4 +1,4 @@
-const baseUrl = "https://parallelum.com.br/fipe/api/v1/carros";
+const baseUrl = "[https://parallelum.com.br/fipe/api/v1/carros](https://parallelum.com.br/fipe/api/v1/carros)";
 const marcaSelect = document.getElementById("marca");
 const modeloSelect = document.getElementById("modelo");
 const anoSelect = document.getElementById("ano");
@@ -9,93 +9,81 @@ let valorFipeAtual = 0;
 
 // Carregar marcas
 async function carregarMarcas() {
-  const res = await fetch(`${baseUrl}/marcas`);
-  const marcas = await res.json();
-  marcaSelect.innerHTML = '<option selected disabled>Selecione</option>';
-  marcas.forEach(marca => {
-    const opt = document.createElement("option");
-    opt.value = marca.codigo;
-    opt.textContent = marca.nome;
-    marcaSelect.appendChild(opt);
-  });
+const res = await fetch(`${baseUrl}/marcas`);
+const marcas = await res.json();
+marcaSelect.innerHTML = '<option selected disabled>Selecione</option>';
+marcas.forEach(marca => {
+const opt = document.createElement("option");
+opt.value = marca.codigo;
+opt.textContent = marca.nome;
+marcaSelect.appendChild(opt);
+});
 }
 
 // Carregar modelos
 marcaSelect.addEventListener("change", async () => {
-  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos`);
-  const modelos = await res.json();
-  modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
-  modelos.modelos.forEach(modelo => {
-    const opt = document.createElement("option");
-    opt.value = modelo.codigo;
-    opt.textContent = modelo.nome;
-    modeloSelect.appendChild(opt);
-  });
-
-  $('#modelo').trigger('change.select2'); // atualiza Select2 se estiver usando
+const res = await fetch(`${baseUrl}/marcas/${marcaSelect2.value}/modelos`);
+const modelos = await res.json();
+modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
+modelos.modelos.forEach(modelo => {
+const opt = document.createElement("option");
+opt.value = modelo.codigo;
+opt.textContent = modelo.nome;
+modeloSelect.appendChild(opt);
+});
 });
 
 // Carregar anos
 modeloSelect.addEventListener("change", async () => {
-  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`);
-  const anos = await res.json();
-  anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
-  anos.forEach(ano => {
-    const opt = document.createElement("option");
-    opt.value = ano.codigo;
-    opt.textContent = ano.nome;
-    anoSelect.appendChild(opt);
-  });
-
-  $('#ano').trigger('change.select2'); // atualiza Select2 se estiver usando
+const res = await fetch(`${baseUrl}/marcas/${marcaSelect2.value}/modelos/${modeloSelect2.value}/anos`);
+const anos = await res.json();
+anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
+anos.forEach(ano => {
+const opt = document.createElement("option");
+opt.value = ano.codigo;
+opt.textContent = ano.nome;
+anoSelect.appendChild(opt);
+});
 });
 
 // Buscar valor FIPE
 anoSelect.addEventListener("change", async () => {
-  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`);
-  const dados = await res.json();
-  valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
-  valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
+const res = await fetch(`${baseUrl}/marcas/${marcaSelect2.value}/modelos/${modeloSelect2.value}/anos/${anoSelect2.value}`);
+const dados = await res.json();
+valorFipeAtual = parseFloat(dados.Valor.replace("R\$", "").replace(".", "").replace(",", "."));
+valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
 });
-
-// Cálculo final
+// Cálculo final do checklist
 document.getElementById("checklist-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const itens = document.querySelectorAll(".checklist-item");
-  let fatorTotal = 0;
-  let notaTotal = 0;
+e.preventDefault();
+const itens = document.querySelectorAll(".checklist-item");
+let fatorTotal = 0;
+let notaTotal = 0;
 
-  itens.forEach(item => {
-    const valor = item.value;
-    if (valor === "regular") {
-      fatorTotal += parseFloat(item.dataset.regular || 0);
-      notaTotal += 1;
-    } else if (valor === "ruim") {
-      fatorTotal += parseFloat(item.dataset.ruim || 0);
-      notaTotal += 2;
-    } else if (valor === "grande") {
-      fatorTotal += parseFloat(item.dataset.grande || 0);
-      notaTotal += 3;
-    }
-  });
-
-  const media = notaTotal / itens.length;
-  let condicao = "";
-  if (media <= 0.5) condicao = "Bom ✅";
-  else if (media <= 1.2) condicao = "Aceitável ⚠️";
-  else condicao = "Ruim ❌";
-
-  const valorDescontado = valorFipeAtual * fatorTotal;
-  const valorFinal = valorFipeAtual - valorDescontado;
-
-  resultadoDiv.innerHTML = isNaN(valorFinal)
-    ? "Selecione marca, modelo e ano primeiro."
-    : `
-      <p><strong>Valor estimado de compra:</strong> ${valorFinal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
-      <p><strong>Desconto aplicado:</strong> ${valorDescontado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
-      <p><strong>Condição geral do carro:</strong> ${condicao}</p>
-    `;
+itens.forEach(item => {
+const valor = item.value;
+if (valor === "regular") {
+fatorTotal += parseFloat(item.dataset.regular || 0);
+notaTotal += 1;
+} else if (valor === "ruim") {
+fatorTotal += parseFloat(item.dataset.ruim || 0);
+notaTotal += 2;
+} else {
+notaTotal += 0;
+}
 });
 
-// Inicia carregamento
-carregarMarcas();
+const media = notaTotal / itens.length;
+let condicao = "";
+if (media <= 0.5) condicao = "Bom ✅";
+else if (media <= 1.2) condicao = "Aceitável ⚠️";
+else condicao = "Ruim ❌";
+
+const valorDescontado = valorFipeAtual \* fatorTotal;
+const valorFinal = valorFipeAtual - valorDescontado;
+
+resultadoDiv.innerHTML = isNaN(valorFinal)
+? "Selecione marca, modelo e ano primeiro."
+: `     <p><strong>Valor estimado de compra:</strong> ${valorFinal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>     <p><strong>Desconto aplicado:</strong> ${valorDescontado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>     <p><strong>Condição geral do carro:</strong> ${condicao}</p>
+  `;
+});
