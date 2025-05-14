@@ -25,7 +25,7 @@ async function carregarMarcas() {
 marcaSelect.addEventListener("change", async () => {
   const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos`);
   const modelos = await res.json();
-  modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
+  modeloSelect.innerHTML = '<option selected>Selecione</option>';
   modelos.modelos.forEach(modelo => {
     const opt = document.createElement("option");
     opt.value = modelo.codigo;
@@ -40,7 +40,7 @@ marcaSelect.addEventListener("change", async () => {
 modeloSelect.addEventListener("change", async () => {
   const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`);
   const anos = await res.json();
-  anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
+  anoSelect.innerHTML = '<option selected>Selecione</option>';
   anos.forEach(ano => {
     const opt = document.createElement("option");
     opt.value = ano.codigo;
