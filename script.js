@@ -21,35 +21,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Carrega modelos ao mudar a marca
-  marcaSelect.addEventListener("change", async () => {
-    const marcaId = marcaSelect.value;
-    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos`);
-    const data = await res.json();
-    modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
-    data.modelos.forEach(modelo => {
-      const opt = document.createElement("option");
-      opt.value = modelo.codigo;
-      opt.textContent = modelo.nome;
-      modeloSelect.appendChild(opt);
-    });
-    anoSelect.innerHTML = '<option selected disabled>Selecione</option>'; // limpa anos
+  // Carregar modelos
+marcaSelect.addEventListener("change", async () => {
+  const res = await fetch(${baseUrl}/marcas/${marcaSelect2.value}/modelos);
+  const modelos = await res.json();
+  modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
+  modelos.modelos.forEach(modelo => {
+    const opt = document.createElement("option");
+    opt.value = modelo.codigo;
+    opt.textContent = modelo.nome;
+    modeloSelect.appendChild(opt);
   });
+});
 
-  // Carrega anos ao mudar o modelo
-  modeloSelect.addEventListener("change", async () => {
-    const marcaId = marcaSelect.value;
-    const modeloId = modeloSelect.value;
-    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos`);
-    const anos = await res.json();
-    anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
-    anos.forEach(ano => {
-      const opt = document.createElement("option");
-      opt.value = ano.codigo;
-      opt.textContent = ano.nome;
-      anoSelect.appendChild(opt);
-    });
+// Carregar anos
+modeloSelect.addEventListener("change", async () => {
+  const res = await fetch(${baseUrl}/marcas/${marcaSelect2.value}/modelos/${modeloSelect2.value}/anos);
+  const anos = await res.json();
+  anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
+  anos.forEach(ano => {
+    const opt = document.createElement("option");
+    opt.value = ano.codigo;
+    opt.textContent = ano.nome;
+    anoSelect.appendChild(opt);
   });
+});
 
   // Busca valor da FIPE
   anoSelect.addEventListener("change", async () => {
