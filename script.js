@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 👇 Aqui vai todo o código dentro dessa função
-
   const baseUrl = "https://parallelum.com.br/fipe/api/v1/carros";
   const marcaSelect = document.getElementById("marca");
   const modeloSelect = document.getElementById("modelo");
@@ -10,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let valorFipeAtual = 0;
 
+  // Carrega marcas
   async function carregarMarcas() {
     const res = await fetch(`${baseUrl}/marcas`);
     const marcas = await res.json();
@@ -22,20 +21,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Carrega modelos ao mudar a marca
   marcaSelect.addEventListener("change", async () => {
-    const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos`);
-    const modelos = await res.json();
+    const marcaId = marcaSelect.value;
+    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos`);
+    const data = await res.json();
     modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
-    modelos.modelos.forEach(modelo => {
+    data.modelos.forEach(modelo => {
       const opt = document.createElement("option");
       opt.value = modelo.codigo;
       opt.textContent = modelo.nome;
       modeloSelect.appendChild(opt);
     });
+    anoSelect.innerHTML = '<option selected disabled>Selecione</option>'; // limpa anos
   });
 
+  // Carrega anos ao mudar o modelo
   modeloSelect.addEventListener("change", async () => {
-    const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`);
+    const marcaId = marcaSelect.value;
+    const modeloId = modeloSelect.value;
+    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos`);
     const anos = await res.json();
     anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
     anos.forEach(ano => {
@@ -46,13 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Busca valor da FIPE
   anoSelect.addEventListener("change", async () => {
-    const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`);
+    const marcaId = marcaSelect.value;
+    const modeloId = modeloSelect.value;
+    const anoId = anoSelect.value;
+    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
     const dados = await res.json();
     valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
     valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
   });
 
+  // Cálculo do checklist
   document.getElementById("checklist-form").addEventListener("submit", function (e) {
     e.preventDefault();
     const itens = document.querySelectorAll(".checklist-item");
@@ -91,5 +101,5 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
   });
 
-  carregarMarcas(); // inicia ao carregar a página
+  carregarMarcas(); // inicia
 });
