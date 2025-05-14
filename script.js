@@ -95,4 +95,12 @@ anoSelect.addEventListener("change", async () => {
       `;
   });
   carregarMarcas(); // inicia
+$(document).ready(function () {
+  $('.select2').select2({
+    width: '100%',
+    placeholder: 'Digite para buscar',
+    allowClear: true
+  });
+});
+
 });
