@@ -32,7 +32,7 @@ marcaSelect.addEventListener("change", async () => {
     modeloSelect.appendChild(opt);
   });
 
-  $('#modelo').trigger('change.select2');
+  $('#modelo').trigger('change.select2'); // atualiza Select2 se estiver usando
 });
 
 // Carregar anos
@@ -47,7 +47,7 @@ modeloSelect.addEventListener("change", async () => {
     anoSelect.appendChild(opt);
   });
 
-  $('#ano').trigger('change.select2');
+  $('#ano').trigger('change.select2'); // atualiza Select2 se estiver usando
 });
 
 // Buscar valor FIPE
@@ -58,7 +58,7 @@ anoSelect.addEventListener("change", async () => {
   valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
 });
 
-// Cálculo final do checklist
+// Cálculo final
 document.getElementById("checklist-form").addEventListener("submit", function (e) {
   e.preventDefault();
   const itens = document.querySelectorAll(".checklist-item");
@@ -73,8 +73,9 @@ document.getElementById("checklist-form").addEventListener("submit", function (e
     } else if (valor === "ruim") {
       fatorTotal += parseFloat(item.dataset.ruim || 0);
       notaTotal += 2;
-    } else {
-      notaTotal += 0;
+    } else if (valor === "grande") {
+      fatorTotal += parseFloat(item.dataset.grande || 0);
+      notaTotal += 3;
     }
   });
 
@@ -96,5 +97,5 @@ document.getElementById("checklist-form").addEventListener("submit", function (e
     `;
 });
 
-// Iniciar
+// Inicia carregamento
 carregarMarcas();
