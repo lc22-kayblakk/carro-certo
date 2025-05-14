@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const baseUrl = "https://parallelum.com.br/fipe/api/v1/carros";
+  const baseUrl = "https://cors-anywhere.herokuapp.com/https://parallelum.com.br/fipe/api/v1/carros";
   const marcaSelect = document.getElementById("marca");
   const modeloSelect = document.getElementById("modelo");
   const anoSelect = document.getElementById("ano");
