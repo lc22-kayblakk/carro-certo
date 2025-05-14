@@ -90,13 +90,3 @@ document.getElementById("checklist-form").addEventListener("submit", function (e
     <p><strong>Condição geral do carro:</strong> ${condicao}</p>
   `;
 });
-
-// Iniciar carregamento
-carregarMarcas();
-$(document).ready(function () {
-  $('.select2').select2({
-    width: '100%',
-    placeholder: 'Digite para buscar',
-    allowClear: true
-  });
-});
