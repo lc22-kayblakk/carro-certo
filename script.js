@@ -32,8 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
       opt.textContent = modelo.nome;
       modeloSelect.appendChild(opt);
     });
-
-    $('#modelo').trigger('change.select2'); // se usar Select2
   });
 
   modeloSelect.addEventListener("change", async () => {
@@ -46,8 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
       opt.textContent = ano.nome;
       anoSelect.appendChild(opt);
     });
-
-    $('#ano').trigger('change.select2');
   });
 
   anoSelect.addEventListener("change", async () => {
