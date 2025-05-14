@@ -8,22 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let valorFipeAtual = 0;
 
-  // Carrega marcas
-  async function carregarMarcas() {
-    const res = await fetch(`${baseUrl}/marcas`);
-    const marcas = await res.json();
-    marcaSelect.innerHTML = '<option selected disabled>Selecione</option>';
-    marcas.forEach(marca => {
-      const opt = document.createElement("option");
-      opt.value = marca.codigo;
-      opt.textContent = marca.nome;
-      marcaSelect.appendChild(opt);
-    });
-  }
+  // Carregar marcas
+async function carregarMarcas() {
+  const res = await fetch(`${baseUrl}/marcas`);
+  const marcas = await res.json();
+  marcaSelect.innerHTML = '<option selected disabled>Selecione</option>';
+  marcas.forEach(marca => {
+    const opt = document.createElement("option");
+    opt.value = marca.codigo;
+    opt.textContent = marca.nome;
+    marcaSelect.appendChild(opt);
+  });
+}
 
-  // Carregar modelos
+// Carregar modelos
 marcaSelect.addEventListener("change", async () => {
-  const res = await fetch(${baseUrl}/marcas/${marcaSelect2.value}/modelos);
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos`);
   const modelos = await res.json();
   modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
   modelos.modelos.forEach(modelo => {
@@ -32,11 +32,13 @@ marcaSelect.addEventListener("change", async () => {
     opt.textContent = modelo.nome;
     modeloSelect.appendChild(opt);
   });
+
+  $('#modelo').trigger('change.select2');
 });
 
 // Carregar anos
 modeloSelect.addEventListener("change", async () => {
-  const res = await fetch(${baseUrl}/marcas/${marcaSelect2.value}/modelos/${modeloSelect2.value}/anos);
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`);
   const anos = await res.json();
   anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
   anos.forEach(ano => {
@@ -45,19 +47,18 @@ modeloSelect.addEventListener("change", async () => {
     opt.textContent = ano.nome;
     anoSelect.appendChild(opt);
   });
+
+  $('#ano').trigger('change.select2');
 });
 
-  // Busca valor da FIPE
-  anoSelect.addEventListener("change", async () => {
-    const marcaId = marcaSelect.value;
-    const modeloId = modeloSelect.value;
-    const anoId = anoSelect.value;
-    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
-    const dados = await res.json();
-    valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
-    valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
-  });
-
+// Buscar valor FIPE
+anoSelect.addEventListener("change", async () => {
+  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos/${anoSelect.value}`);
+  const dados = await res.json();
+  valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
+  valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
+});
+  
   // Cálculo do checklist
   document.getElementById("checklist-form").addEventListener("submit", function (e) {
     e.preventDefault();
