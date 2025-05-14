@@ -43,6 +43,9 @@ modeloSelect.addEventListener("change", async () => {
     opt.textContent = a.nome;
     anoSelect.appendChild(opt);
   });
+  
+  // 👇 Aqui atualiza o Select2
+$('#modelo').trigger('change.select2');
 });
 
 anoSelect.addEventListener("change", async () => {
