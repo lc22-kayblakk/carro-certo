@@ -1,53 +1,66 @@
-const baseUrl = "https://parallelum.com.br/fipe/api/v1/carros";
-const marcaSelect = document.getElementById("marca");
-const modeloSelect = document.getElementById("modelo");
-const anoSelect = document.getElementById("ano");
-const resultadoDiv = document.getElementById("resultado");
+document.addEventListener("DOMContentLoaded", () => {
+  const baseUrl = "https://parallelum.com.br/fipe/api/v1/carros";
+  const marcaSelect = document.getElementById("marca");
+  const modeloSelect = document.getElementById("modelo");
+  const anoSelect = document.getElementById("ano");
+  const resultadoDiv = document.getElementById("resultado");
+  const valorFipeDiv = document.getElementById("valor-fipe");
 
-let valorFipeAtual = 0;
+  let valorFipeAtual = 0;
 
-// Carregar marcas
-async function carregarMarcas() {
-  const res = await fetch(`${baseUrl}/marcas`);
-  const marcas = await res.json();
-  marcaSelect.innerHTML = '<option selected disabled>Selecione</option>';
-  marcas.forEach(marca => {
-    const opt = document.createElement("option");
-    opt.value = marca.codigo;
-    opt.textContent = marca.nome;
-    marcaSelect.appendChild(opt);
-  });
-}
+  // Carrega marcas
+  async function carregarMarcas() {
+    const res = await fetch(`${baseUrl}/marcas`);
+    const marcas = await res.json();
+    marcaSelect.innerHTML = '<option selected disabled>Selecione</option>';
+    marcas.forEach(marca => {
+      const opt = document.createElement("option");
+      opt.value = marca.codigo;
+      opt.textContent = marca.nome;
+      marcaSelect.appendChild(opt);
+    });
+  }
 
-// Carregar modelos
-marcaSelect.addEventListener("change", async () => {
-  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos`);
-  const modelos = await res.json();
-  modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
-  modelos.modelos.forEach(modelo => {
-    const opt = document.createElement("option");
-    opt.value = modelo.codigo;
-    opt.textContent = modelo.nome;
-    modeloSelect.appendChild(opt);
-  });
-
-  $('#modelo').trigger('change.select2');
-});
-
-// Carregar anos
-modeloSelect.addEventListener("change", async () => {
-  const res = await fetch(`${baseUrl}/marcas/${marcaSelect.value}/modelos/${modeloSelect.value}/anos`);
-  const anos = await res.json();
-  anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
-  anos.forEach(ano => {
-    const opt = document.createElement("option");
-    opt.value = ano.codigo;
-    opt.textContent = ano.nome;
-    anoSelect.appendChild(opt);
+  // Carrega modelos ao mudar a marca
+  marcaSelect.addEventListener("change", async () => {
+    const marcaId = marcaSelect.value;
+    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos`);
+    const data = await res.json();
+    modeloSelect.innerHTML = '<option selected disabled>Selecione</option>';
+    data.modelos.forEach(modelo => {
+      const opt = document.createElement("option");
+      opt.value = modelo.codigo;
+      opt.textContent = modelo.nome;
+      modeloSelect.appendChild(opt);
+    });
+    anoSelect.innerHTML = '<option selected disabled>Selecione</option>'; // limpa anos
   });
 
-  $('#ano').trigger('change.select2');
-});
+  // Carrega anos ao mudar o modelo
+  modeloSelect.addEventListener("change", async () => {
+    const marcaId = marcaSelect.value;
+    const modeloId = modeloSelect.value;
+    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos`);
+    const anos = await res.json();
+    anoSelect.innerHTML = '<option selected disabled>Selecione</option>';
+    anos.forEach(ano => {
+      const opt = document.createElement("option");
+      opt.value = ano.codigo;
+      opt.textContent = ano.nome;
+      anoSelect.appendChild(opt);
+    });
+  });
+
+  // Busca valor da FIPE
+  anoSelect.addEventListener("change", async () => {
+    const marcaId = marcaSelect.value;
+    const modeloId = modeloSelect.value;
+    const anoId = anoSelect.value;
+    const res = await fetch(`${baseUrl}/marcas/${marcaId}/modelos/${modeloId}/anos/${anoId}`);
+    const dados = await res.json();
+    valorFipeAtual = parseFloat(dados.Valor.replace("R$", "").replace(".", "").replace(",", "."));
+    valorFipeDiv.textContent = `Valor original da Tabela FIPE: ${dados.Valor}`;
+  });
 
   // Cálculo do checklist
   document.getElementById("checklist-form").addEventListener("submit", function (e) {
@@ -87,13 +100,6 @@ modeloSelect.addEventListener("change", async () => {
         <p><strong>Condição geral do carro:</strong> ${condicao}</p>
       `;
   });
-  carregarMarcas(); // inicia
-$(document).ready(function () {
-  $('.select2').select2({
-    width: '100%',
-    placeholder: 'Digite para buscar',
-    allowClear: true
-  });
-});
 
+  carregarMarcas(); // inicia
 });
