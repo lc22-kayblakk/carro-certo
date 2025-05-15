@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    const media = notaTotal / itens.length;
+    const media = itens.length > 0 ? notaTotal / itens.length : 0;
     const valorDescontado = valorFipeAtual * fatorTotal;
     const valorFinal = valorFipeAtual - valorDescontado;
 
@@ -92,14 +92,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Regra extra: se valor estimado < 50% da FIPE, condição é automaticamente "Ruim"
     if (valorFinal < valorFipeAtual * 0.5) {
-      condicao = "Ruim ❌";
-    } else if (media <= 0.5) {
-      condicao = "Bom ✅";
-    } else if (media <= 1.2) {
-      condicao = "Aceitável ⚠️";
-    } else {
-      condicao = "Ruim ❌";
-    }
+  condicao = "Ruim ❌";
+} else if (media <= 0.5) {
+  condicao = "Bom ✅";
+} else if (media <= 1.2) {
+  condicao = "Aceitável ⚠️";
+} else {
+  condicao = "Ruim ❌";
+}
+
 
     resultadoDiv.innerHTML = isNaN(valorFinal)
       ? "Selecione marca, modelo e ano primeiro."
