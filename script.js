@@ -81,8 +81,6 @@ anoSelect.addEventListener("change", async () => {
     });
 
     const media = notaTotal / itens.length;
-const valorDescontado = valorFipeAtual * fatorTotal;
-const valorFinal = valorFipeAtual - valorDescontado;
 
 let condicao = "";
 if (valorFinal < valorFipeAtual * 0.5) {
