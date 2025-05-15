@@ -64,50 +64,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Cálculo final do checklist
   document.getElementById("checklist-form").addEventListener("submit", function (e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const itens = document.querySelectorAll(".checklist-item");
-  let fatorTotal = 0;
-  let notaTotal = 0;
+    const itens = document.querySelectorAll(".checklist-item");
+    let fatorTotal = 0;
+    let notaTotal = 0;
 
-  itens.forEach(item => {
-    const valor = item.value;
-    if (valor === "regular") {
-      fatorTotal += parseFloat(item.dataset.regular || 0);
-      notaTotal += 1;
-    } else if (valor === "ruim") {
-      fatorTotal += parseFloat(item.dataset.ruim || 0);
-      notaTotal += 2;
-    } else if (valor === "grande") {
-      fatorTotal += parseFloat(item.dataset.grande || 0);
-      notaTotal += 3;
+    itens.forEach(item => {
+      const valor = item.value;
+      if (valor === "regular") {
+        fatorTotal += parseFloat(item.dataset.regular || 0);
+        notaTotal += 1;
+      } else if (valor === "ruim") {
+        fatorTotal += parseFloat(item.dataset.ruim || 0);
+        notaTotal += 2;
+      } else if (valor === "grande") {
+        fatorTotal += parseFloat(item.dataset.grande || 0);
+        notaTotal += 3;
+      }
+    });
+
+    const media = notaTotal / itens.length;
+    const valorDescontado = valorFipeAtual * fatorTotal;
+    const valorFinal = valorFipeAtual - valorDescontado;
+
+    let condicao = "";
+
+    // Regra extra: se valor estimado < 50% da FIPE, condição é automaticamente "Ruim"
+    if (valorFinal < valorFipeAtual * 0.5) {
+      condicao = "Ruim ❌";
+    } else if (media <= 0.5) {
+      condicao = "Bom ✅";
+    } else if (media <= 1.2) {
+      condicao = "Aceitável ⚠️";
     } else {
-      notaTotal += 0; // bom
+      condicao = "Ruim ❌";
     }
+
+    resultadoDiv.innerHTML = isNaN(valorFinal)
+      ? "Selecione marca, modelo e ano primeiro."
+      : `
+        <p><strong>Valor estimado de compra:</strong> ${valorFinal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+        <p><strong>Desconto aplicado:</strong> ${valorDescontado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+        <p><strong>Condição geral do carro:</strong> ${condicao}</p>
+      `;
   });
 
-  const media = itens.length > 0 ? notaTotal / itens.length : 0;
-  const valorDescontado = valorFipeAtual * fatorTotal;
-  const valorFinal = valorFipeAtual - valorDescontado;
-
-  let condicao = "";
-
-  // Regras de classificação
-  if (valorFinal < valorFipeAtual * 0.5) {
-    condicao = "Ruim ❌";
-  } else if (media <= 0.5) {
-    condicao = "Bom ✅";
-  } else if (media <= 1.2) {
-    condicao = "Aceitável ⚠️";
-  } else {
-    condicao = "Ruim ❌";
-  }
-
-  resultadoDiv.innerHTML = isNaN(valorFinal)
-    ? "Selecione marca, modelo e ano primeiro."
-    : `
-      <p><strong>Valor estimado de compra:</strong> ${valorFinal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
-      <p><strong>Desconto aplicado:</strong> ${valorDescontado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
-      <p><strong>Condição geral do carro:</strong> ${condicao}</p>
-    `;
+  carregarMarcas();
 });
