@@ -86,7 +86,7 @@ anoSelect.addEventListener("change", async () => {
 
   let condicao = "";
 
-  // 🔥 Aqui entra sua nova regra:
+  // 🚨 Regra nova: Se o valor estimado for menor que 50% da FIPE, já é Ruim
   if (valorFinal < valorFipeAtual * 0.5) {
     condicao = "Ruim ❌";
   } else if (media <= 0.5) {
@@ -105,4 +105,3 @@ anoSelect.addEventListener("change", async () => {
       <p><strong>Condição geral do carro:</strong> ${condicao}</p>
     `;
 });
-
