@@ -94,7 +94,6 @@ if (valorFinal < valorFipeAtual * 0.5) {
 } else {
   condicao = "Ruim ❌";
 }
-
     const valorDescontado = valorFipeAtual * fatorTotal;
     const valorFinal = valorFipeAtual - valorDescontado;
 
