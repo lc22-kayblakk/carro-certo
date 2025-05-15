@@ -81,10 +81,19 @@ anoSelect.addEventListener("change", async () => {
     });
 
     const media = notaTotal / itens.length;
-    let condicao = "";
-    if (media <= 0.5) condicao = "Bom ✅";
-    else if (media <= 1.2) condicao = "Aceitável ⚠️";
-    else condicao = "Ruim ❌";
+const valorDescontado = valorFipeAtual * fatorTotal;
+const valorFinal = valorFipeAtual - valorDescontado;
+
+let condicao = "";
+if (valorFinal < valorFipeAtual * 0.5) {
+  condicao = "Ruim ❌";
+} else if (media <= 0.5) {
+  condicao = "Bom ✅";
+} else if (media <= 1.2) {
+  condicao = "Aceitável ⚠️";
+} else {
+  condicao = "Ruim ❌";
+}
 
     const valorDescontado = valorFipeAtual * fatorTotal;
     const valorFinal = valorFipeAtual - valorDescontado;
