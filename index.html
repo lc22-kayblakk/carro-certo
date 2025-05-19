@@ -5,380 +5,491 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Carro Certo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="style.css"/>
 </head>
-<body class="bg-grey text-white">
+<body>
   
 <div class="container py-4">
-    <div class="text-center mb-4">
-      <img src="logo.png" alt="Logo Carro Certo" height="325">
-      <h1 class="mt-3">Guia de Compra - Carro Certo</h1>
+    <div class="header-container text-center">
+      <div class="logo-container">
+        <img src="logo.png" alt="Logo Carro Certo" class="img-fluid">
+      </div>
+      <h1 class="text-white">Guia de Compra - Carro Certo</h1>
     </div>
 
-    <div class="row mb-4">
-      <div class="col-md-4">
-        <label for="marca" class="form-label">Marca</label>
-     <select id="marca" class="form-select"></select>
+    <div class="section-card">
+      <div class="section-header">
+        <i class="bi bi-car-front-fill section-icon"></i>
+        <h5>Selecione o Veículo</h5>
       </div>
-      <div class="col-md-4">
-        <label for="modelo" class="form-label">Modelo</label>
-        <select id="modelo" class="form-select"></select>
+      
+      <div class="row mb-4">
+        <div class="col-md-4 mb-3 mb-md-0">
+          <label for="marca" class="form-label">Marca</label>
+          <select id="marca" class="form-select"></select>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+          <label for="modelo" class="form-label">Modelo</label>
+          <select id="modelo" class="form-select"></select>
+        </div>
+        <div class="col-md-4">
+          <label for="ano" class="form-label">Ano</label>
+          <select id="ano" class="form-select"></select>
+        </div>
       </div>
-      <div class="col-md-4">
-        <label for="ano" class="form-label">Ano</label>
-        <select id="ano" class="form-select"></select>
-      </div>
+      
+      <div id="valor-fipe" class="text-center fs-5 mt-3 fw-bold"></div>
     </div>
 
-    <form id="checklist-form" class="mb-4">
-      <div id="itens-checklist" class="row g-3">
-<!-- 🔧 Motor -->
-<div class="col-12">
-  <h5 class="mt-4 text-danger">🔧 Motor e Transmissão</h5>
-</div>
+    <ul class="nav nav-tabs" id="checklistTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="motor-tab" data-bs-toggle="tab" data-bs-target="#motor" type="button" role="tab" aria-controls="motor" aria-selected="true">Motor</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="lataria-tab" data-bs-toggle="tab" data-bs-target="#lataria" type="button" role="tab" aria-controls="lataria" aria-selected="false">Lataria</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="exterior-tab" data-bs-toggle="tab" data-bs-target="#exterior" type="button" role="tab" aria-controls="exterior" aria-selected="false">Exterior</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="interior-tab" data-bs-toggle="tab" data-bs-target="#interior" type="button" role="tab" aria-controls="interior" aria-selected="false">Interior</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="acessorios-tab" data-bs-toggle="tab" data-bs-target="#acessorios" type="button" role="tab" aria-controls="acessorios" aria-selected="false">Acessórios</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pneus-tab" data-bs-toggle="tab" data-bs-target="#pneus" type="button" role="tab" aria-controls="pneus" aria-selected="false">Pneus</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="suspensao-tab" data-bs-toggle="tab" data-bs-target="#suspensao" type="button" role="tab" aria-controls="suspensao" aria-selected="false">Suspensão</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="importantes-tab" data-bs-toggle="tab" data-bs-target="#importantes" type="button" role="tab" aria-controls="importantes" aria-selected="false">Importantes</button>
+      </li>
+    </ul>
 
-<div class="col-md-6">
-  <label class="form-label">Funcionamento do motor</label>
-  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.06">
-    <option value="bom">Bom</option>
-    <option value="regular">Regular</option>
-    <option value="ruim">Ruim</option>
-  </select>
-</div>
+    <form id="checklist-form">
+      <div class="tab-content" id="checklistTabsContent">
+        <!-- Motor e Transmissão -->
+        <div class="tab-pane fade show active" id="motor" role="tabpanel" aria-labelledby="motor-tab">
+          <div class="section-card">
+            <div class="section-header">
+              <i class="bi bi-gear-fill section-icon"></i>
+              <h5>Motor e Transmissão</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Funcionamento do motor</label>
+                <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.06">
+                  <option value="bom">Bom</option>
+                  <option value="regular">Regular</option>
+                  <option value="ruim">Ruim</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Vazamento de óleo</label>
-  <select class="form-select checklist-item" data-ruim="0.05">
-    <option value="bom">Não</option>
-    <option value="ruim">Sim</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Vazamento de óleo</label>
+                <select class="form-select checklist-item" data-ruim="0.05">
+                  <option value="bom">Não</option>
+                  <option value="ruim">Sim</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Vazamento de líquido de arrefecimento</label>
-  <select class="form-select checklist-item" data-ruim="0.04">
-    <option value="bom">Não</option>
-    <option value="ruim">Sim</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Vazamento de líquido de arrefecimento</label>
+                <select class="form-select checklist-item" data-ruim="0.04">
+                  <option value="bom">Não</option>
+                  <option value="ruim">Sim</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Ruído no motor</label>
-  <select class="form-select checklist-item" data-ruim="0.05">
-    <option value="bom">Sem ruído</option>
-    <option value="ruim">Batidas metálicas</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Ruído no motor</label>
+                <select class="form-select checklist-item" data-ruim="0.05">
+                  <option value="bom">Sem ruído</option>
+                  <option value="ruim">Batidas metálicas</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Embreagem</label>
-  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.03">
-    <option value="bom">Boas condições</option>
-    <option value="regular">Pedal alto</option>
-    <option value="ruim">Patinando</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Embreagem</label>
+                <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.03">
+                  <option value="bom">Boas condições</option>
+                  <option value="regular">Pedal alto</option>
+                  <option value="ruim">Patinando</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Ruídos na transmissão</label>
-  <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.06">
-    <option value="bom">Sem ruídos</option>
-    <option value="regular">Ruído leve</option>
-    <option value="ruim">Ruído severo</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Ruídos na transmissão</label>
+                <select class="form-select checklist-item" data-regular="0.03" data-ruim="0.06">
+                  <option value="bom">Sem ruídos</option>
+                  <option value="regular">Ruído leve</option>
+                  <option value="ruim">Ruído severo</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Engate de marchas</label>
-  <select class="form-select checklist-item" data-regular="0.06" data-ruim="0.03">
-    <option value="bom">Sem problemas</option>
-    <option value="regular">Dificuldade em marcha específica</option>
-    <option value="regular">Escapa marcha</option>
-    <option value="ruim">Dificuldade em todas as marchas</option>
-    <option value="bom">Câmbio automático</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Engate de marchas</label>
+                <select class="form-select checklist-item" data-regular="0.06" data-ruim="0.03">
+                  <option value="bom">Sem problemas</option>
+                  <option value="regular">Dificuldade em marcha específica</option>
+                  <option value="regular">Escapa marcha</option>
+                  <option value="ruim">Dificuldade em todas as marchas</option>
+                  <option value="bom">Câmbio automático</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<!-- 🖌 Lataria e Pintura -->
-<div class="col-12">
-  <h5 class="mt-4 text-danger">🖌 Lataria e Pintura</h5>
-</div>
+        <!-- Lataria e Pintura -->
+        <div class="tab-pane fade" id="lataria" role="tabpanel" aria-labelledby="lataria-tab">
+          <div class="section-card">
+            <div class="section-header">
+              <i class="bi bi-brush-fill section-icon"></i>
+              <h5>Lataria e Pintura</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Funilaria geral</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
+                  <option value="bom">Boas condições</option>
+                  <option value="regular">Pequenos detalhes</option>
+                  <option value="ruim">Colisão/arranhados</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Funilaria geral</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
-    <option value="bom">Boas condições</option>
-    <option value="regular">Pequenos detalhes</option>
-    <option value="ruim">Colisão/arranhados</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Estado da pintura</label>
+                <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
+                  <option value="bom">Boas condições</option>
+                  <option value="regular">Com queimados</option>
+                  <option value="ruim">Ruim</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6">
+                <label class="form-label">Podres</label>
+                <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
+                  <option value="bom">Sem podres</option>
+                  <option value="regular">Pequenos podres</option>
+                  <option value="ruim">Bastantes podres</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<div class="col-md-6">
-  <label class="form-label">Estado da pintura</label>
-  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
-    <option value="bom">Boas condições</option>
-    <option value="regular">Com queimados</option>
-    <option value="ruim">Ruim</option>
-  </select>
-</div>
-        
-<div class="col-md-6">
-  <label class="form-label">Podres</label>
-  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
-    <option value="bom">Sem podres</option>
-    <option value="regular">Pequenos podres</option>
-    <option value="ruim">Bastantes podres</option>
-  </select>
-</div>
-        
-        <!-- 🚗 Detalhes Externos -->
-<div class="col-12">
-  <h5 class="mt-4 text-danger">🚗 Detalhes Externos</h5>
-</div>
+        <!-- Detalhes Externos -->
+        <div class="tab-pane fade" id="exterior" role="tabpanel" aria-labelledby="exterior-tab">
+          <div class="section-card">
+            <div class="section-header">
+              <i class="bi bi-car-front section-icon"></i>
+              <h5>Detalhes Externos</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Faróis</label>
+                <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.02">
+                  <option value="bom">Bom</option>
+                  <option value="regular">Amarelado/Embaçado</option>
+                  <option value="ruim">Trincado/Quebrado</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Faróis</label>
-  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.02">
-    <option value="bom">Bom</option>
-    <option value="regular">Amarelado/Embaçado</option>
-    <option value="ruim">Trincado/Quebrado</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Lanternas</label>
+                <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.02">
+                  <option value="bom">Bom</option>
+                  <option value="regular">Desgastada</option>
+                  <option value="ruim">Danificadas</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Lanternas</label>
-  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.02">
-    <option value="bom">Bom</option>
-    <option value="regular">Desgastada</option>
-    <option value="ruim">Danificadas</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Frisos e molduras</label>
+                <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.15">
+                  <option value="bom">Presentes</option>
+                  <option value="regular">Parcialmente faltando</option>
+                  <option value="ruim">Faltando ou quebrados</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Frisos e molduras</label>
-  <select class="form-select checklist-item" data-regular="0.05" data-ruim="0.15">
-    <option value="bom">Presentes</option>
-    <option value="regular">Parcialmente faltando</option>
-    <option value="ruim">Faltando ou quebrados</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Borracha de portas</label>
+                <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.02">
+                  <option value="bom">Boas</option>
+                  <option value="regular">Desgastadas</option>
+                  <option value="ruim">Rasgadas/Faltando</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Borracha de portas</label>
-  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.02">
-    <option value="bom">Boas</option>
-    <option value="regular">Desgastadas</option>
-    <option value="ruim">Rasgadas/Faltando</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Retrovisores</label>
+                <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.02">
+                  <option value="bom">Inteiros</option>
+                  <option value="regular">Arranhados</option>
+                  <option value="ruim">Quebrados</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<div class="col-md-6">
-  <label class="form-label">Retrovisores</label>
-  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.02">
-    <option value="bom">Inteiros</option>
-    <option value="regular">Arranhados</option>
-    <option value="ruim">Quebrados</option>
-  </select>
-</div>
+        <!-- Interior -->
+        <div class="tab-pane fade" id="interior" role="tabpanel" aria-labelledby="interior-tab">
+          <div class="section-card">
+            <div class="section-header">
+              <i class="bi bi-car-front-fill section-icon"></i>
+              <h5>Interior</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Bancos e estofado</label>
+                <select class="form-select checklist-item" data-regular="0.015" data-ruim="0.03">
+                  <option value="bom">Boas condições</option>
+                  <option value="regular">Furado</option>
+                  <option value="ruim">Rasgado</option>
+                </select>
+              </div>
 
-<!-- 🛋 Interior -->
-<div class="col-12">
-  <h5 class="mt-4 text-danger">🛋 Interior</h5>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Painel e acabamentos</label>
+                <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.025">
+                  <option value="bom">Boas condições</option>
+                  <option value="regular">Pequenos detalhes</option>
+                  <option value="ruim">Trincado/danificado</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Bancos e estofado</label>
-  <select class="form-select checklist-item" data-regular="0.015" data-ruim="0.03">
-    <option value="bom">Boas condições</option>
-    <option value="regular">Furado</option>
-    <option value="ruim">Rasgado</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Sistema elétrico interno</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
+                  <option value="bom">Funcionando</option>
+                  <option value="regular">Intermitente</option>
+                  <option value="ruim">Com falhas</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<div class="col-md-6">
-  <label class="form-label">Painel e acabamentos</label>
-  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.025">
-    <option value="bom">Boas condições</option>
-    <option value="regular">Pequenos detalhes</option>
-    <option value="ruim">Trincado/danificado</option>
-  </select>
-</div>
+        <!-- Acessórios -->
+        <div class="tab-pane fade" id="acessorios" role="tabpanel" aria-labelledby="acessorios-tab">
+          <div class="section-card">
+            <div class="section-header">
+              <i class="bi bi-tools section-icon"></i>
+              <h5>Acessórios</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Teto solar</label>
+                <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
+                  <option value="bom">Funcionando ou não possui</option>
+                  <option value="regular">Funcionamento eletrico com defeito</option>
+                  <option value="regular">Entra água</option>
+                  <option value="ruim">Ambos problemas</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6">
+                <label class="form-label">Retrovisores elétricos</label>
+                <select class="form-select checklist-item" data-ruim="0.03">
+                  <option value="bom">Funcionando/não possui de fábrica</option>
+                  <option value="ruim">Não funciona</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Sistema elétrico interno</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
-    <option value="bom">Funcionando</option>
-    <option value="regular">Intermitente</option>
-    <option value="ruim">Com falhas</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Ar condicionado</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
+                  <option value="bom">Funcionando/não possui de fábrica</option>
+                  <option value="regular">necessita revisão/funcionando fraco</option>
+                  <option value="ruim">Não funciona</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <!-- 🛠 Acessórios -->
-<div class="col-12">
-  <h5 class="mt-4 text-danger">🛠 Acessórios</h5>
-</div>
+        <!-- Pneus e Rodas -->
+        <div class="tab-pane fade" id="pneus" role="tabpanel" aria-labelledby="pneus-tab">
+          <div class="section-card">
+            <div class="section-header">
+              <i class="bi bi-disc-fill section-icon"></i>
+              <h5>Pneus e Rodas</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Pneus</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04" data-grande="0.07">
+                  <option value="bom">Novos</option>
+                  <option value="regular">Meia vida</option>
+                  <option value="ruim">Desgastados</option>
+                  <option value="grande">Remold (remoldado)</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Teto solar</label>
-  <select class="form-select checklist-item" data-regular="0.01" data-ruim="0.03">
-    <option value="bom">Funcionando ou não possui</option>
-    <option value="regular">Funcionamento eletrico com defeito</option>
-    <option value="regular">Entra água</option>
-    <option value="ruim">Ambos problemas</option>
-  </select>
-</div>
-        
-        <div class="col-md-6">
-  <label class="form-label">Retrovisores elétricos</label>
-  <select class="form-select checklist-item" data-ruim="0.03">
-    <option value="bom">Funcionando/não possui de fábrica</option>
-    <option value="ruim">Não funciona</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Rodas</label>
+                <select class="form-select checklist-item" data-ruim="0.03">
+                  <option value="bom">Boas condições</option>
+                  <option value="ruim">Necessita troca/Reparo</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div class="col-md-6">
-  <label class="form-label">Ar condicionado</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04">
-    <option value="bom">Funcionando/não possui de fábrica</option>
-    <option value="regular">necessita revisão/funcionando fraco</option>
-    <option value="ruim">Não funciona</option>
-  </select>
-</div>
+        <!-- Suspensão e freios -->
+        <div class="tab-pane fade" id="suspensao" role="tabpanel" aria-labelledby="suspensao-tab">
+          <div class="section-card">
+            <div class="section-header">
+              <i class="bi bi-wrench-adjustable section-icon"></i>
+              <h5>Suspensão e freios</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Reparos</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
+                  <option value="bom">Não necessita reparos</option>
+                  <option value="regular">Reparo básico</option>
+                  <option value="ruim">Reparo urgente</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6">
+                <label class="form-label">Barulhos ao rodar</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
+                  <option value="bom">Sem ruídos</option>
+                  <option value="regular">Leves estalos</option>
+                  <option value="ruim">Ruídos fortes</option>
+                </select>
+              </div>
 
-<!-- 🛞 Pneus e Rodas -->
-<div class="col-12">
-  <h5 class="mt-4 text-danger">🛞 Pneus e Rodas</h5>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Pedal do freio</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
+                  <option value="bom">Sem problemas, funciona muito bem</option>
+                  <option value="regular">Frouxo ou "borrachudo"</option>
+                  <option value="regular">Muito duro</option>
+                  <option value="regular">Afundando aos poucos</option>
+                  <option value="regular">Pedal vibrando ou tripidando ao freiar</option>
+                  <option value="ruim">Com 2 (dois) ou mais problemas apresentados acima</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Pneus</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.04" data-grande="0.07">
-    <option value="bom">Novos</option>
-    <option value="regular">Meia vida</option>
-    <option value="ruim">Desgastados</option>
-    <option value="grande">Remold (remoldado)</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Ruidos ou vibração ao freiar</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.02">
+                  <option value="bom">Sem problemas, funciona muito bem</option>
+                  <option value="regular">Chiado agudo (tipo assobio)</option>
+                  <option value="regular">Grunhidos ou rangidos metálicos</option>
+                  <option value="ruim">Batidas secas</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<div class="col-md-6">
-  <label class="form-label">Rodas</label>
-  <select class="form-select checklist-item" data-ruim="0.03">
-    <option value="bom">Boas condições</option>
-    <option value="ruim">Necessita troca/Reparo</option>
-  </select>
-</div>
+        <!-- Itens importantes -->
+        <div class="tab-pane fade" id="importantes" role="tabpanel" aria-labelledby="importantes-tab">
+          <div class="section-card">
+            <div class="section-header">
+              <i class="bi bi-exclamation-triangle-fill section-icon"></i>
+              <h5>Itens importantes</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Sinistro</label>
+                <select class="form-select checklist-item" data-regular="0.10" data-ruim="0.35" data-grande="1.0">
+                  <option value="bom">Sem monta</option>
+                  <option value="regular">Pequena monta</option>
+                  <option value="ruim">Média monta</option>
+                  <option value="grande">Grande monta</option>
+                </select>
+              </div>
 
-<!-- 🛠 Suspensão e freios -->
-<div class="col-12">
-  <h5 class="mt-4 text-danger">🛠 Suspensão e freios</h5>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Sistema airbag</label>
+                <select class="form-select checklist-item" data-ruim="0.10">
+                  <option value="bom">Sistema intacto</option>
+                  <option value="ruim">Airbag já acionado</option>
+                </select>
+              </div>
 
-<div class="col-md-6">
-  <label class="form-label">Reparos</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
-    <option value="bom">Não necessita reparos</option>
-    <option value="regular">Reparo básico</option>
-    <option value="ruim">Reparo urgente</option>
-  </select>
-</div>
-        
-        <div class="col-md-6">
-  <label class="form-label">Barulhos ao rodar</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
-    <option value="bom">Sem ruídos</option>
-    <option value="regular">Leves estalos</option>
-    <option value="ruim">Ruídos fortes</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Alagamento</label>
+                <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.15">
+                  <option value="bom">Não teve contato com água</option>
+                  <option value="regular">Teve contato leve (sem danos)</option>
+                  <option value="ruim">Já passou por alagamento e foi restaurado</option>
+                </select>
+              </div>
 
-        <div class="col-md-6">
-  <label class="form-label">Pedal do freio</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.05">
-    <option value="bom">Sem problemas, funciona muito bem</option>
-    <option value="regular">Frouxo ou “borrachudo”</option>
-    <option value="regular">Muito duro</option>
-    <option value="regular">Afundando aos poucos</option>
-    <option value="regular">Pedal vibrando ou tripidando ao freiar</option>
-    <option value="ruim">Com 2 (dois) ou mais problemas apresentados acima</option>
-  </select>
-</div>
+              <div class="col-md-6">
+                <label class="form-label">Luz da injeção</label>
+                <select class="form-select checklist-item" data-regular="0.10" data-ruim="0.10">
+                  <option value="bom">Apagada</option>
+                  <option value="regular">Lâmpada removida</option>
+                  <option value="ruim">Acesa</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <div class="col-md-6">
-  <label class="form-label">Ruidos ou vibração ao freiar</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.02">
-    <option value="bom">Sem problemas, funciona muito bem</option>
-    <option value="regular">Chiado agudo (tipo assobio)</option>
-    <option value="regular">Grunhidos ou rangidos metálicos</option>
-    <option value="ruim">Batidas secas</option>
-  </select>
-</div>
+      <div class="progress-container">
+        <div class="d-flex justify-content-between mb-1">
+          <span>Progresso do checklist</span>
+          <span id="progress-percentage">0%</span>
+        </div>
+        <div class="progress">
+          <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
 
-<!-- ⚠ Itens importantes -->
-<div class="col-12">
-  <h5 class="mt-4 text-danger">⚠ Itens importantes</h5>
-</div>
-
-<div class="col-md-6">
-  <label class="form-label">Sinistro</label>
-  <select class="form-select checklist-item" data-regular="0.10" data-ruim="0.35" data-grande="1.0">
-    <option value="bom">Sem monta</option>
-    <option value="regular">Pequena monta</option>
-    <option value="ruim">Média monta</option>
-    <option value="grande">Grande monta</option>
-  </select>
-</div>
-
-<div class="col-md-6">
-  <label class="form-label">Sistema airbag</label>
-  <select class="form-select checklist-item" data-ruim="0.10">
-    <option value="bom">Sistema intacto</option>
-    <option value="ruim">Airbag já acionado</option>
-  </select>
-</div>
-
-<div class="col-md-6">
-  <label class="form-label">Alagamento</label>
-  <select class="form-select checklist-item" data-regular="0.02" data-ruim="0.15">
-    <option value="bom">Não teve contato com água</option>
-    <option value="regular">Teve contato leve (sem danos)</option>
-    <option value="ruim">Já passou por alagamento e foi restaurado</option>
-  </select>
-</div>
-
-<div class="col-md-6">
-  <label class="form-label">Luz da injeção</label>
-  <select class="form-select checklist-item" data-regular="0.10" data-ruim="0.10">
-    <option value="bom">Apagada</option>
-    <option value="regular">Lâmpada removida</option>
-    <option value="ruim">Acesa</option>
-  </select>
-</div>
-
-    <!-- Seu formulário permanece igual -->
-    <!-- ... (toda a estrutura do checklist que você mandou) ... -->
-
-    <form id="checklist-form" class="mb-4">
-      <!-- Checklist está exatamente como você mandou, mantive tudo -->
-      <!-- ... -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary px-5 py-2">
+          <i class="bi bi-calculator me-2"></i>Calcular Valor
+        </button>
+      </div>
     </form>
 
-  <div class="mt-4 text-center">
-  <button type="submit" class="btn btn-danger px-5">Calcular Valor</button>
+    <div class="result-card mt-4" id="resultado-container" style="display: none;">
+      <div class="row">
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="result-label">Valor original FIPE</div>
+          <div class="result-value" id="valor-fipe-resultado"></div>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="result-label">Desconto aplicado</div>
+          <div class="result-value" id="desconto-resultado"></div>
+        </div>
+        <div class="col-md-4">
+          <div class="result-label">Valor estimado de compra</div>
+          <div class="result-value" id="valor-final-resultado"></div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <div class="result-label">Condição geral do carro</div>
+        <div class="fs-3 fw-bold mt-2" id="condicao-resultado"></div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="https://drive.google.com/file/d/1TonNV3Q9jCvq9HtJZ7_qnLBEV09qZLOP/view?usp=drive_link" class="guide-link" target="_blank">
+        <i class="bi bi-file-earmark-pdf me-2"></i>Clique e acesse o guia completo
+      </a>
+    </div>
 </div>
-        
-</form>
 
-<div id="valor-fipe" class="text-center fs-5 mt-3"></div>
-<div id="resultado" class="text-center fs-4 mt-2"></div>
-<div id="resultado" class="text-center fs-4 mt-2"></div>
-
-<div class="text-center mt-3">
-  <a href="https://drive.google.com/file/d/1TonNV3Q9jCvq9HtJZ7_qnLBEV09qZLOP/view?usp=drive_link" class="btn btn-danger" target="_blank">
-    Clique e acesse o guia completo 🔗
-  </a>
-</div>
-
-  <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
   
 </body>
 </html>
