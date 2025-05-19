@@ -82,7 +82,7 @@ h1 {
 
 .form-label {
   font-weight: 500;
-  color: var(--primary-color);
+  color: #FF0000;
 }
 
 select.form-select {
