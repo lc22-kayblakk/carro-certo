@@ -143,7 +143,7 @@ select.form-select:focus {
 }
 
 .nav-tabs .nav-link.active {
-  color: var(--accent-color);
+  color: #FFFFFF;
   border-bottom: 3px solid var(--accent-color);
   font-weight: 500;
 }
