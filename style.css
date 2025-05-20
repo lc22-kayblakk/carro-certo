@@ -1,9 +1,9 @@
 :root {
   --primary-color: #1A2A3A;
   --accent-color: #E53935;
-  --background-color: #000000;
-  --text-color: #FFFFFF;
-  --card-bg: #222427;
+  --background-color: #F5F7FA;
+  --text-color: #333333;
+  --card-bg: #222427; /* Alterado para cinza escuro */
   --border-radius: 0.5rem;
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
@@ -27,7 +27,7 @@ h1 {
 }
 
 .header-container {
-  background-color: #222427;
+  background-color: #222427; /* Alterado para cinza escuro conforme solicitado */
   color: white;
   padding: 2rem 0;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
@@ -48,7 +48,8 @@ h1 {
 }
 
 .section-card {
-  background-color: var(--card-bg);
+  background-color: #222427; /* Alterado para cinza escuro */
+  color: white; /* Texto branco para melhor legibilidade */
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   padding: 1.5rem;
@@ -82,7 +83,7 @@ h1 {
 
 .form-label {
   font-weight: 500;
-  color: #FFFFFF;
+  color: white; /* Alterado para branco para melhor legibilidade */
 }
 
 select.form-select {
@@ -143,13 +144,13 @@ select.form-select:focus {
 }
 
 .nav-tabs .nav-link.active {
-  color: #FFFFFF;
+  color: var(--accent-color);
   border-bottom: 3px solid var(--accent-color);
   font-weight: 500;
 }
 
 .result-card {
-  background-color: var(--primary-color);
+  background-color: #222427; /* Alterado para cinza escuro conforme solicitado */
   color: white;
   border-radius: var(--border-radius);
   padding: 1.5rem;
