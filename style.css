@@ -1,8 +1,8 @@
 :root {
-  --primary-color: #1A2A3A;
+  --primary-color: #222427;
   --accent-color: #E53935;
   --background-color: #F5F7FA;
-  --text-color: #333333;
+  --text-color: #FFFFFF;
   --card-bg: #222427; /* Alterado para cinza escuro */
   --border-radius: 0.5rem;
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
